@@ -2087,7 +2087,7 @@ GameObject:
   - component: {fileID: 739218374}
   - component: {fileID: 739218373}
   m_Layer: 5
-  m_Name: Track Controls Scroll View
+  m_Name: Controls Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5327,7 +5327,7 @@ GameObject:
   - component: {fileID: 1825267678}
   - component: {fileID: 1825267681}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Track Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
