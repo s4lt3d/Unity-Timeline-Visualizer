@@ -4,10 +4,7 @@ using UnityEngine.UI;
 
 public class DraggbleItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    void Start()
-    {
-        image = GetComponent<Image>();
-    }
+
     [HideInInspector]
     public Image image;
     [HideInInspector]
@@ -17,6 +14,12 @@ public class DraggbleItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     
     private Vector2 initialOffsetToMouse;
     private Canvas canvas;
+    
+    void Start()
+    {
+        image = GetComponent<Image>();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDrag = transform.parent;
@@ -24,6 +27,11 @@ public class DraggbleItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         image.raycastTarget = false;
         canvas = transform.root.GetComponent<Canvas>();
         rectTransform = GetComponent<RectTransform>();
+        SetPointerOffsetOnBeginDrag(eventData);
+    }
+
+    private void SetPointerOffsetOnBeginDrag(PointerEventData eventData)
+    {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, null, out initialOffset);
     }
 

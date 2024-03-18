@@ -102,4 +102,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topMargin: 5
-  bottomMargin: 5
+  bottomMargin: 10

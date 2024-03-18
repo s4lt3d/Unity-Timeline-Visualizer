@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8637596294422619405}
   - component: {fileID: 4541208651011711214}
   - component: {fileID: 3815028702115024516}
+  - component: {fileID: 2845269496675745093}
   m_Layer: 5
   m_Name: Clip
   m_TagString: Untagged
@@ -90,3 +91,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 0}
   parentAfterDrag: {fileID: 0}
+--- !u!114 &2845269496675745093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722719982425426636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.14352083, b: 1, a: 0.33333334}
+  m_EffectDistance: {x: 8.6, y: -7.76}
+  m_UseGraphicAlpha: 1
