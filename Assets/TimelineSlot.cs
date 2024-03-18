@@ -11,7 +11,7 @@ public class TimelineSlot : MonoBehaviour, IDropHandler
         if (dropped != null)
         {
             dropped.transform.SetParent(transform);
-            DraggbleItem draggable = dropped.GetComponent<DraggbleItem>();
+            DraggableItem draggable = dropped.GetComponent<DraggableItem>();
             if (draggable != null)
             {
                 draggable.parentAfterDrag = transform;

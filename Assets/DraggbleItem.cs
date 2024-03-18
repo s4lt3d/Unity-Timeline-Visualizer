@@ -2,48 +2,46 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggbleItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
     [HideInInspector]
     public Image image;
     [HideInInspector]
     public Transform parentAfterDrag;
     private RectTransform rectTransform;
-    private Vector2 initialOffset;
-    
     private Vector2 initialOffsetToMouse;
     private Canvas canvas;
-    
+
     void Start()
     {
         image = GetComponent<Image>();
+        rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>(); // Adjusted to get the nearest Canvas in the parent hierarchy
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
+        transform.SetParent(canvas.transform); // Ensure it's set to the canvas transform for consistent scaling
         image.raycastTarget = false;
-        canvas = transform.root.GetComponent<Canvas>();
-        rectTransform = GetComponent<RectTransform>();
-        SetPointerOffsetOnBeginDrag(eventData);
-    }
 
-    private void SetPointerOffsetOnBeginDrag(PointerEventData eventData)
-    {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, null, out initialOffset);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, eventData.pressEventCamera, out initialOffsetToMouse);
+        initialOffsetToMouse = rectTransform.anchoredPosition - initialOffsetToMouse;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        
-        transform.position = eventData.position - initialOffset;
+        Vector2 localPointerPosition;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, eventData.pressEventCamera, out localPointerPosition))
+        {
+            rectTransform.anchoredPosition = localPointerPosition + initialOffsetToMouse;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.SetParent(parentAfterDrag);
+        transform.SetAsLastSibling(); // Optional: Ensures the item stays on top of other UI elements within the same parent
         image.raycastTarget = true;
     }
 }
