@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class MacroParameters
 {
@@ -630,8 +628,6 @@ public class WaveformFileSerializer
             serializer.Serialize(writer, waveformDataSetInstance);
             return writer.ToString();
         }
-
-        return "";
     }
     
     public WaveformDataSet Deserialize(string xml)
@@ -642,8 +638,6 @@ public class WaveformFileSerializer
             var result = (WaveformDataSet)serializer.Deserialize(reader);
             return result;
         }
-
-        return null;
     }
 
     public WaveformDataSet LoadFromFile(string path)
