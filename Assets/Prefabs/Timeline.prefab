@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4084029686609316107}
   - component: {fileID: 8283355343214185288}
   - component: {fileID: 4522840487518805603}
-  - component: {fileID: 437130862629784508}
+  - component: {fileID: 419029915682627275}
   m_Layer: 5
   m_Name: Timeline
   m_TagString: Untagged
@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b8a840bad8fed409baf58d96adef7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topMargin: 5
+  topMargin: 10
   bottomMargin: 10
---- !u!114 &437130862629784508
+--- !u!114 &419029915682627275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,9 +118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 80
+  m_MinHeight: 120
   m_PreferredWidth: -1
-  m_PreferredHeight: 41.05127
+  m_PreferredHeight: 120
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 1
+  m_FlexibleHeight: 0
   m_LayoutPriority: 1

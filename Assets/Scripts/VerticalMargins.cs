@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 
 [ExecuteInEditMode]
-public class EditorDynamicHeightLayoutAdjustPivot : MonoBehaviour
+public class VerticalMargins : MonoBehaviour
 {
     [SerializeField] private float topMargin = 10f;
     [SerializeField] private float bottomMargin = 10f;
@@ -46,7 +46,7 @@ public class EditorDynamicHeightLayoutAdjustPivot : MonoBehaviour
     {
         if (rectTransform.pivot != newPivot)
         {
-            Undo.RecordObject(rectTransform, "Pivot Change"); // Record the action for undo functionality
+            //Undo.RecordObject(rectTransform, "Pivot Change"); // Record the action for undo functionality
             rectTransform.pivot = newPivot; // Set the new pivot
 
             // Adjust for the pivot change
@@ -54,6 +54,8 @@ public class EditorDynamicHeightLayoutAdjustPivot : MonoBehaviour
             Vector2 deltaPosition = rectTransform.rect.size * (newPivot - rectTransform.pivot);
             Vector3 deltaPosition3D = new Vector3(deltaPosition.x, deltaPosition.y, 0);
             rectTransform.position += deltaPosition3D;
+            rectTransform.anchorMin = new Vector2(0, 1);
+            rectTransform.anchorMax = new Vector2(0, 1);
         }
     }
     #endif
