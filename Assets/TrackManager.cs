@@ -34,7 +34,7 @@ public class TrackManager : MonoBehaviour
         var controlTrackRectTransform = newControlTrack.GetComponent<RectTransform>();
 
         clipTrackRectTransform.sizeDelta = new Vector2(TrackWidth, 10);
-        controlTrackRectTransform.sizeDelta = new Vector2(TrackWidth, 10);
+        controlTrackRectTransform.sizeDelta = new Vector2(200, 10);
 
         var newClip = Instantiate(ClipPrefab, newClipTrack.transform);
         var newControl = Instantiate(ControlPrefab, newControlTrack.transform);
@@ -42,7 +42,7 @@ public class TrackManager : MonoBehaviour
         var clipRectTransform = newClip.GetComponent<RectTransform>();
         var controlRectTransform = newControl.GetComponent<RectTransform>();
 
-        clipRectTransform.sizeDelta = new Vector2(100, 10);
+        clipRectTransform.sizeDelta = new Vector2(TrackWidth, 10);
         controlRectTransform.sizeDelta = new Vector2(100, 10);
 
         clipRectTransform.anchoredPosition = new Vector2(5, 0);
