@@ -7,7 +7,7 @@ public class AudioVisualizer : MonoBehaviour
 {
     [SerializeField]
     private Image image;
-    private AudioClip audioClip;
+    private WaveformAudioClip waveformAudioClip;
     [SerializeField]
     private AudioSource audioSource;
     

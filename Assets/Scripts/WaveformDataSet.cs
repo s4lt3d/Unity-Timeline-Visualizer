@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,7 +18,7 @@ public class MacroParameters
 public class WaveformDataSet
 {
     private List<Transport> transport = new();
-    private List<Track> track = new();
+    private List<Track> tracks = new();
     private string appVersion = "";
     private string projectID = "";
     private string creationTime = "";
@@ -34,10 +33,10 @@ public class WaveformDataSet
     }
 
     [XmlElement("TRACK")]
-    public List<Track> Track
+    public List<Track> Tracks
     {
-        get => track;
-        set => track = value;
+        get => tracks;
+        set => tracks = value;
     }
 
     [XmlAttribute("appVersion")]
@@ -163,7 +162,7 @@ public class Track
 {
     private string modifiers;
     private List<MacroParameters> macroParameters;
-    private List<AudioClip> audioClip;
+    private List<WaveformAudioClip> audioClips;
     private List<Plugin> plugin;
     private List<OutputDevices> outputDevices;
     private int id;
@@ -187,10 +186,10 @@ public class Track
     }
 
     [XmlElement("AUDIOCLIP")]
-    public List<AudioClip> AudioClip
+    public List<WaveformAudioClip> AudioClips
     {
-        get => audioClip;
-        set => audioClip = value;
+        get => audioClips;
+        set => audioClips = value;
     }
 
     [XmlElement("PLUGIN")]
@@ -264,7 +263,7 @@ public class Track
     }
 }
 
-public class AudioClip
+public class WaveformAudioClip
 {
     private List<LoopInfo> loopInfo;
     private string name;
@@ -614,47 +613,5 @@ public class Device
     {
         get => name;
         set => name = value;
-    }
-}
-
-
-public class WaveformFileSerializer
-{
-    public string Serialize(WaveformDataSet waveformDataSetInstance)
-    {
-        var serializer = new XmlSerializer(typeof(WaveformDataSet));
-        using (var writer = new StringWriter())
-        {
-            serializer.Serialize(writer, waveformDataSetInstance);
-            return writer.ToString();
-        }
-    }
-    
-    public WaveformDataSet Deserialize(string xml)
-    {
-        var serializer = new XmlSerializer(typeof(WaveformDataSet));
-        using (var reader = new StringReader(xml))
-        {
-            var result = (WaveformDataSet)serializer.Deserialize(reader);
-            return result;
-        }
-    }
-
-    public WaveformDataSet LoadFromFile(string path)
-    {
-        
-        using (var tr = new StreamReader(path))
-        {
-            var serializer = new XmlSerializer(typeof(WaveformDataSet));
-            var result = (WaveformDataSet)serializer.Deserialize(tr);
-            return result;
-        }
-    }
-    
-    public void SaveToFile(string path, WaveformDataSet waveformDataSetInstance)
-    {
-        TextWriter tw = new StreamWriter(path);
-        var serializer = new XmlSerializer(typeof(WaveformDataSet));
-        serializer.Serialize(tw, waveformDataSetInstance);
     }
 }
