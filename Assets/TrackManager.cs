@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class TrackManager : MonoBehaviour
@@ -15,19 +14,11 @@ public class TrackManager : MonoBehaviour
     public GameObject ControlPrefab;
 
     public float TrackWidth = 10000;
-
     public float clipScale = 100;
 
-    // Called before the first frame update
-    void Start()
+    // Adds all clips to a new track
+    public void AddTrack(List<(WaveformAudioClip, AudioClip)> clips)
     {
-
-    }
-
-    
-    public void AddTrack(WaveformAudioClip clip, AudioClip audioClip)
-    {
-       
         var newClipTrack = Instantiate(TrackPrefab, TrackPanel.transform);
         var newControlTrack = Instantiate(TrackControlPrefab, TrackControlPanel.transform);
 
@@ -37,37 +28,21 @@ public class TrackManager : MonoBehaviour
         clipTrackRectTransform.sizeDelta = new Vector2(TrackWidth, 10);
         controlTrackRectTransform.sizeDelta = new Vector2(200, 10);
 
-        var newPivot = new Vector2(0, 0);
-        
-        var newControl = Instantiate(ControlPrefab, newControlTrack.transform);
-        var controlRectTransform = newControl.GetComponent<RectTransform>();
-        
-        controlRectTransform.sizeDelta = new Vector2(100, 10);
-        controlRectTransform.anchoredPosition = new Vector2(5, 0);
-        controlRectTransform.pivot = newPivot;
+        foreach (var (waveformClip, audioClip) in clips)
+        {
+            var clipLength = audioClip.length;
+            var newClip = Instantiate(ClipPrefab, newClipTrack.transform);
+            var clipRectTransform = newClip.GetComponent<RectTransform>();
+            clipRectTransform.sizeDelta = new Vector2(clipLength * clipScale, 10);
+            clipRectTransform.anchoredPosition = new Vector2(float.Parse(waveformClip.Start) * clipScale, 0);
+            clipRectTransform.pivot = new Vector2(0, 0);
 
-        var clipLength = audioClip.length;
-        
-        var newClip = Instantiate(ClipPrefab, newClipTrack.transform);
-        var clipRectTransform = newClip.GetComponent<RectTransform>();
-        clipRectTransform.sizeDelta = new Vector2(clipLength * clipScale, 10);
-        clipRectTransform.anchoredPosition = new Vector2(float.Parse(clip.Start) * clipScale, 0);
-        clipRectTransform.pivot = newPivot;
-        
-        var clipVisualizer = newClip.GetComponent<ClipAudioVisualizer>();
-        clipVisualizer.audioClip = audioClip;
-        
-        clipVisualizer.Init();
-        
-        
+            var clipVisualizer = newClip.GetComponent<ClipAudioVisualizer>();
+            clipVisualizer.audioClip = audioClip;
+            clipVisualizer.Init();
+        }
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(TrackPanel.GetComponent<RectTransform>());
         LayoutRebuilder.ForceRebuildLayoutImmediate(TrackControlPanel.GetComponent<RectTransform>());
-        
-        
-    
     }
-    
-
-
-
 }

@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LineHeight: 0.42
+    - _LineHeight: 1
     - _LineWidth: 1
     m_Colors:
     - _LineColor: {r: 0.8743253, g: 1, b: 0, a: 1}
