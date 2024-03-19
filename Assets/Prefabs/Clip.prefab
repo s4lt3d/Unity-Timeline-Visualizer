@@ -140,6 +140,7 @@ MonoBehaviour:
   targetImage: {fileID: 4760295420453059714}
   waveformMaterial: {fileID: 2100000, guid: fcd7156d72b0d964eb373652d2124c2d, type: 2}
   lineColor: {r: 1, g: 0, b: 0, a: 1}
+  audioClip: {fileID: 8300000, guid: 4efc04c6be121d241b7d4f750732413b, type: 3}
 --- !u!114 &4541208651011711214
 MonoBehaviour:
   m_ObjectHideFlags: 0

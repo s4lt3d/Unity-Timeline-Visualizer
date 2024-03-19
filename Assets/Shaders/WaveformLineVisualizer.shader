@@ -5,7 +5,7 @@ Shader "Custom/WaveformCenterLineVisualizer"
         _WaveformTex ("Waveform Texture", 2D) = "white" {}
         _LineColor ("Line Color", Color) = (1,0,0,1) // Default to red
         _LineWidth ("Line Width", Float) = 0.01 // Width of the line in UV space
-        _LineHeight ("Line Height", Float) = 0.2 // Max height of the waveform in UV space
+        _LineHeight ("Line Height", Float) = 1 // Max height of the waveform in UV space
     }
     SubShader
     {

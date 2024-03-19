@@ -39,7 +39,9 @@ public class WaveformManager : MonoBehaviour
             {
                 var audioClip = Instantiate(audioClipPrefab, transform);
                 
-                string audioFilePath = "file://D:\\UnityGames\\BeatConnectTechTest\\Assets\\Audio\\[90bpm] Cabasa(2).wav"; 
+                string audioName = clip.Name;
+                
+                string audioFilePath = $"file://D:\\UnityGames\\BeatConnectTechTest\\Assets\\Audio\\{audioName}.wav"; 
                 
                 
                 try
@@ -54,7 +56,7 @@ public class WaveformManager : MonoBehaviour
     
                         audioClipPrefabs.Add(audioClip);
                         
-                        trackManager.AddTrack(clip, audioclipData);
+                        trackManager.AddTrack(clip, audioSource.clip);
                         
                     }
                 }

@@ -14,14 +14,9 @@ public class TrackManager : MonoBehaviour
     public GameObject ClipPrefab;
     public GameObject ControlPrefab;
 
-
-
     public float TrackWidth = 10000;
 
-
     public float clipScale = 100;
-
-    
 
     // Called before the first frame update
     void Start()
@@ -32,6 +27,7 @@ public class TrackManager : MonoBehaviour
     
     public void AddTrack(WaveformAudioClip clip, AudioClip audioClip)
     {
+       
         var newClipTrack = Instantiate(TrackPrefab, TrackPanel.transform);
         var newControlTrack = Instantiate(TrackControlPrefab, TrackControlPanel.transform);
 
@@ -57,6 +53,11 @@ public class TrackManager : MonoBehaviour
         clipRectTransform.sizeDelta = new Vector2(clipLength * clipScale, 10);
         clipRectTransform.anchoredPosition = new Vector2(float.Parse(clip.Start) * clipScale, 0);
         clipRectTransform.pivot = newPivot;
+        
+        var clipVisualizer = newClip.GetComponent<ClipAudioVisualizer>();
+        clipVisualizer.audioClip = audioClip;
+        
+        clipVisualizer.Init();
         
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(TrackPanel.GetComponent<RectTransform>());
