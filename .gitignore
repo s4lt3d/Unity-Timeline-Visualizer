@@ -74,3 +74,4 @@ crashlytics-build.properties
 Assets/AssetBundles/
 *.blend1
 *.blend1.meta
+Assets/AmplifyShaderEditor/
