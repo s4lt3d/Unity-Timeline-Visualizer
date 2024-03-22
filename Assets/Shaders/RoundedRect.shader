@@ -1,3 +1,5 @@
+// Upgrade NOTE: upgraded instancing buffer 'RoundedRect' to new syntax.
+
 // Made with Amplify Shader Editor v1.9.3.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "RoundedRect"
@@ -17,7 +19,10 @@ Shader "RoundedRect"
 
         [Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
 
-        
+        [HDR]_ColorOn("Color On", Color) = (0.4784314,0.9843138,0.9647059,1)
+        [HDR]_ColorOff("Color Off", Color) = (0.572549,0.5803922,0.5568628,1)
+        [HDR]_Color0("Color 0", Color) = (0.2077697,0.2735849,0.2710339,1)
+
     }
 
     SubShader
@@ -59,7 +64,8 @@ Shader "RoundedRect"
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
-            
+            #pragma multi_compile_instancing
+
 
             struct appdata_t
             {
@@ -89,7 +95,15 @@ Shader "RoundedRect"
             float _UIMaskSoftnessX;
             float _UIMaskSoftnessY;
 
-            
+            UNITY_INSTANCING_BUFFER_START(RoundedRect)
+            	UNITY_DEFINE_INSTANCED_PROP(float4, _ColorOff)
+#define _ColorOff_arr RoundedRect
+            	UNITY_DEFINE_INSTANCED_PROP(float4, _ColorOn)
+#define _ColorOn_arr RoundedRect
+            	UNITY_DEFINE_INSTANCED_PROP(float4, _Color0)
+#define _Color0_arr RoundedRect
+            UNITY_INSTANCING_BUFFER_END(RoundedRect)
+
             
             v2f vert(appdata_t v )
             {
@@ -126,12 +140,14 @@ Shader "RoundedRect"
                 const half invAlphaPrecision = half(1.0/alphaPrecision);
                 IN.color.a = round(IN.color.a * alphaPrecision)*invAlphaPrecision;
 
-                float4 color16 = IsGammaSpace() ? float4(0.4784314,0.9843138,0.9647059,1) : float4(0.1946179,0.9646866,0.921582,1);
+                float4 _ColorOff_Instance = UNITY_ACCESS_INSTANCED_PROP(_ColorOff_arr, _ColorOff);
+                float4 _ColorOn_Instance = UNITY_ACCESS_INSTANCED_PROP(_ColorOn_arr, _ColorOn);
+                float4 lerpResult20 = lerp( _ColorOff_Instance , _ColorOn_Instance , 1.0);
                 float2 texCoord2 = IN.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
                 float2 appendResult10_g2 = (float2(0.17 , 1.0));
                 float2 temp_output_11_0_g2 = ( abs( (texCoord2*2.0 + -1.0) ) - appendResult10_g2 );
                 float2 break16_g2 = ( 1.0 - ( temp_output_11_0_g2 / fwidth( temp_output_11_0_g2 ) ) );
-                float4 color6 = IsGammaSpace() ? float4(0.2077697,0.2735849,0.2710339,1) : float4(0.03557744,0.06083427,0.05970694,1);
+                float4 _Color0_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color0_arr, _Color0);
                 float temp_output_2_0_g1 = 1.0;
                 float temp_output_3_0_g1 = 1.0;
                 float2 appendResult21_g1 = (float2(temp_output_2_0_g1 , temp_output_3_0_g1));
@@ -140,7 +156,7 @@ Shader "RoundedRect"
                 float temp_output_30_0_g1 = ( length( max( ( ( abs( (texCoord2*2.0 + -1.0) ) - appendResult21_g1 ) + Radius25_g1 ) , temp_cast_0 ) ) / Radius25_g1 );
                 
 
-                half4 color = ( ( color16 * saturate( min( break16_g2.x , break16_g2.y ) ) ) + ( color6 * saturate( ( ( 1.0 - temp_output_30_0_g1 ) / fwidth( temp_output_30_0_g1 ) ) ) ) );
+                half4 color = ( ( lerpResult20 * saturate( min( break16_g2.x , break16_g2.y ) ) ) + ( _Color0_Instance * saturate( ( ( 1.0 - temp_output_30_0_g1 ) / fwidth( temp_output_30_0_g1 ) ) ) ) );
 
                 #ifdef UNITY_UI_CLIP_RECT
                 half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
@@ -169,10 +185,13 @@ Node;AmplifyShaderEditor.RangedFloatNode;9;-1228.221,167.0693;Inherit;False;Cons
 Node;AmplifyShaderEditor.RangedFloatNode;8;-1281.522,66.96923;Inherit;False;Constant;_Float8;Float 7;0;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;2;-1614.112,-258.6715;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;14;-1247.149,-587.3441;Inherit;False;Constant;_Float10;Float 7;0;0;Create;True;0;0;0;False;0;False;0.17;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;16;-1135.524,-903.6616;Inherit;False;InstancedProperty;_ColorOn;Color On;0;1;[HDR];Create;True;0;0;0;False;0;False;0.4784314,0.9843138,0.9647059,1;0.4784314,0.9843138,0.9647059,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;18;-1132.516,-1160.255;Inherit;False;InstancedProperty;_ColorOff;Color Off;1;1;[HDR];Create;True;0;0;0;False;0;False;0.572549,0.5803922,0.5568628,1;0.4784314,0.9843138,0.9647059,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.RangedFloatNode;21;-812.8605,-803.3651;Inherit;False;Constant;_ColorLerp;ColorLerp;3;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;1;-1020.5,-74.99998;Inherit;False;Rounded Rectangle;-1;;1;8679f72f5be758f47babb3ba1d5f51d3;0;4;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;6;-1067.527,-350.9462;Inherit;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;0.2077697,0.2735849,0.2710339,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.FunctionNode;10;-911.5223,-562.8903;Inherit;False;Rectangle;-1;;2;6b23e0c975270fb4084c354b2c83366a;0;3;1;FLOAT2;0,0;False;2;FLOAT;0.5;False;3;FLOAT;0.5;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;16;-652.0562,-745.5622;Inherit;False;Constant;_Color1;Color 1;0;1;[HDR];Create;True;0;0;0;False;0;False;0.4784314,0.9843138,0.9647059,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;6;-1067.527,-350.9462;Inherit;False;InstancedProperty;_Color0;Color 0;2;1;[HDR];Create;True;0;0;0;False;0;False;0.2077697,0.2735849,0.2710339,1;0.2077697,0.2735849,0.2710339,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.LerpOp;20;-639.0483,-976.5455;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;5;-624.8278,-119.6462;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;15;-312.4424,-488.7365;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;17;31.24311,-401.0886;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
@@ -184,12 +203,15 @@ WireConnection;1;4;9;0
 WireConnection;10;1;2;0
 WireConnection;10;2;14;0
 WireConnection;10;3;7;0
+WireConnection;20;0;18;0
+WireConnection;20;1;16;0
+WireConnection;20;2;21;0
 WireConnection;5;0;6;0
 WireConnection;5;1;1;0
-WireConnection;15;0;16;0
+WireConnection;15;0;20;0
 WireConnection;15;1;10;0
 WireConnection;17;0;15;0
 WireConnection;17;1;5;0
 WireConnection;0;0;17;0
 ASEEND*/
-//CHKSM=6BC26555891915FCB9E90FA215E9C9FD8DC48D25
+//CHKSM=ED1248175C5A3AC2BC0B6FA5517523977AA5C6EF

@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c851e8d6bbc46f443a45ff19a4ed9105, type: 2}
+  m_Material: {fileID: 2100000, guid: fcd7156d72b0d964eb373652d2124c2d, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 4760295420453059714}
   waveformMaterial: {fileID: 2100000, guid: c851e8d6bbc46f443a45ff19a4ed9105, type: 2}
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  lineColor: {r: 0.054901965, g: 0.054901965, b: 0.04705883, a: 1}
   audioClip: {fileID: 8300000, guid: 4efc04c6be121d241b7d4f750732413b, type: 3}
 --- !u!114 &4541208651011711214
 MonoBehaviour:
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: 2}
+  m_EffectColor: {r: 0.20392159, g: 0.28627452, b: 0.36862746, a: 1}
+  m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
 --- !u!114 &8902029621265024434
 MonoBehaviour:

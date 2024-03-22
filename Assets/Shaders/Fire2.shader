@@ -1,3 +1,5 @@
+// Upgrade NOTE: upgraded instancing buffer 'Fire2' to new syntax.
+
 // Made with Amplify Shader Editor v1.9.3.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "Fire2"
@@ -19,6 +21,7 @@ Shader "Fire2"
 
         _Texture0("Texture 0", 2D) = "white" {}
         _TextureSample1("Texture Sample 1", 2D) = "white" {}
+        _FireLerp("FireLerp", Float) = 0
 
     }
 
@@ -62,6 +65,7 @@ Shader "Fire2"
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
             #include "UnityShaderVariables.cginc"
+            #pragma multi_compile_instancing
 
 
             struct appdata_t
@@ -94,6 +98,10 @@ Shader "Fire2"
 
             uniform sampler2D _Texture0;
             uniform sampler2D _TextureSample1;
+            UNITY_INSTANCING_BUFFER_START(Fire2)
+            	UNITY_DEFINE_INSTANCED_PROP(float, _FireLerp)
+#define _FireLerp_arr Fire2
+            UNITY_INSTANCING_BUFFER_END(Fire2)
             float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
             float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
             float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
@@ -197,14 +205,16 @@ Shader "Fire2"
                 float temp_output_25_0 = ( texCoord37.y - 0.5 );
                 float2 temp_cast_0 = (texCoord37.x).xx;
                 float temp_output_9_0 = ( 10.0 * tex2D( _Texture0, temp_cast_0 ).r );
+                float4 temp_output_23_0 = ( color5 * ( abs( temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) );
                 float2 temp_cast_1 = (texCoord37.x).xx;
+                float2 temp_cast_2 = (texCoord37.x).xx;
                 float4 color55 = IsGammaSpace() ? float4(35.30828,7.0122,2.498227,0.3686275) : float4(2542.896,72.59045,7.495319,0.3686275);
                 float2 texCoord51 = IN.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
                 float2 texCoord48 = IN.texcoord.xy * float2( 2.11,0.52 ) + ( float2( 0,-0.3 ) * _Time.y );
                 float simplePerlin2D49 = snoise( texCoord48*5.0 );
                 simplePerlin2D49 = simplePerlin2D49*0.5 + 0.5;
-                float2 temp_cast_2 = (simplePerlin2D49).xx;
-                float2 lerpResult52 = lerp( texCoord51 , temp_cast_2 , 0.28);
+                float2 temp_cast_3 = (simplePerlin2D49).xx;
+                float2 lerpResult52 = lerp( texCoord51 , temp_cast_3 , 0.28);
                 float time40 = 2.0;
                 float2 voronoiSmoothId40 = 0;
                 float2 texCoord38 = IN.texcoord.xy * float2( 1,0.52 ) + ( _Time.y * float2( -0.2,-0.5 ) );
@@ -212,10 +222,12 @@ Shader "Fire2"
                 float2 id40 = 0;
                 float2 uv40 = 0;
                 float voroi40 = voronoi40( coords40, time40, id40, uv40, 0, voronoiSmoothId40 );
-                float4 lerpResult70 = lerp( ( color5 * ( abs( temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) ) , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , 0.61);
+                float4 lerpResult70 = lerp( temp_output_23_0 , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , 0.0);
+                float _FireLerp_Instance = UNITY_ACCESS_INSTANCED_PROP(_FireLerp_arr, _FireLerp);
+                float4 lerpResult73 = lerp( temp_output_23_0 , lerpResult70 , _FireLerp_Instance);
                 
 
-                half4 color = lerpResult70;
+                half4 color = lerpResult73;
 
                 #ifdef UNITY_UI_CLIP_RECT
                 half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
@@ -259,7 +271,7 @@ Node;AmplifyShaderEditor.VoronoiNode;40;-641.9268,1382.93;Inherit;True;0;0;1;0;1
 Node;AmplifyShaderEditor.PowerNode;43;-232.5269,1378.93;Inherit;True;False;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;52;-376.2487,881.4979;Inherit;True;3;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;37;-1103.418,-67.5753;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TexturePropertyNode;8;-671.8557,-135.6244;Inherit;True;Property;_Texture0;Texture 0;0;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+Node;AmplifyShaderEditor.TexturePropertyNode;8;-671.8557,-135.6244;Inherit;True;Property;_Texture0;Texture 0;0;0;Create;True;0;0;0;False;0;False;0867e427f292dcb4fb8ce074de68058e;0867e427f292dcb4fb8ce074de68058e;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;26;-853.7899,-453.3491;Inherit;False;Constant;_Float1;Float 1;1;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;10;-271.9933,-11.99948;Inherit;False;Constant;_Float0;Float 0;1;0;Create;True;0;0;0;False;0;False;10;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;7;-405.418,87.18089;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -279,9 +291,11 @@ Node;AmplifyShaderEditor.Compare;64;301.0537,-565.0758;Inherit;True;4;4;0;FLOAT;
 Node;AmplifyShaderEditor.ColorNode;5;313.2513,-237.2346;Float;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;1,0,0,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;65;1350.822,222.3978;Inherit;True;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;797.5829,24.60763;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;0.61;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.StickyNoteNode;59;-1979.157,550.8216;Inherit;False;3047.511;1186.025;New Note;;1,1,1,1;Basic Fire;0;0
+Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;70;1827.128,-32.40115;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;74;1773.27,556.6571;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.StickyNoteNode;59;-1979.157,550.8216;Inherit;False;3047.511;1186.025;New Note;;1,1,1,1;Basic Fire;0;0
+Node;AmplifyShaderEditor.LerpOp;73;2329.919,345.4937;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;32;2793.008,334.8137;Float;False;True;-1;2;ASEMaterialInspector;0;3;Fire2;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;34;0;33;0
 WireConnection;34;1;35;0
@@ -330,6 +344,9 @@ WireConnection;23;1;28;0
 WireConnection;70;0;23;0
 WireConnection;70;1;65;0
 WireConnection;70;2;71;0
-WireConnection;32;0;70;0
+WireConnection;73;0;23;0
+WireConnection;73;1;70;0
+WireConnection;73;2;74;0
+WireConnection;32;0;73;0
 ASEEND*/
-//CHKSM=EA0C851855D8C3B5FA67F7030D60F0957B5DFFC8
+//CHKSM=59C21FB0BDE036458B69904AD6C428CB3830F440
