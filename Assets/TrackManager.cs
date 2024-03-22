@@ -27,6 +27,8 @@ public class TrackManager : MonoBehaviour
 
         clipTrackRectTransform.sizeDelta = new Vector2(TrackWidth, 10);
         controlTrackRectTransform.sizeDelta = new Vector2(200, 10);
+        
+        var newControl = Instantiate(ControlPrefab, controlTrackRectTransform);
 
         foreach (var (waveformClip, audioClip) in clips)
         {
