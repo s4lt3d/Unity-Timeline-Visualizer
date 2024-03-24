@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+[ExecuteAlways]
 public class FrequencyBar : MonoBehaviour
 {
     private Material imageMaterial;

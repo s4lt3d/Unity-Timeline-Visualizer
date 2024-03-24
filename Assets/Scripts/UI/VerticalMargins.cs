@@ -1,6 +1,4 @@
 using UnityEngine;
-#if UNITY_EDITOR
-#endif
 
 [ExecuteInEditMode]
 public class VerticalMargins : MonoBehaviour

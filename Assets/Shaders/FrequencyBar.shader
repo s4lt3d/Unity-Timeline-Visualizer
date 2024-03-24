@@ -150,7 +150,7 @@ Shader "FrequencyBar"
                 float4 lerpResult5 = lerp( _Color0_Instance , _Color1_Instance , clampResult15);
                 float _Height_Instance = UNITY_ACCESS_INSTANCED_PROP(_Height_arr, _Height);
                 float _Peak_Instance = UNITY_ACCESS_INSTANCED_PROP(_Peak_arr, _Peak);
-                float4 color21 = IsGammaSpace() ? float4(0.572549,0.5803922,0.5568628,1) : float4(0.2874409,0.2961383,0.2704979,1);
+                float4 color21 = IsGammaSpace() ? float4(0.572549,0.5803922,0.5568628,1) : float4(0.2874408,0.2961383,0.2704979,1);
                 
 
                 half4 color = ( ( lerpResult5 * ( texCoord1.y < _Height_Instance ? 1.0 : 0.0 ) ) + ( (( texCoord1.y >= _Peak_Instance && texCoord1.y <= ( _Peak_Instance + 0.05 ) ) ? 1.0 :  0.0 ) * color21 ) );
@@ -223,4 +223,4 @@ WireConnection;20;0;10;0
 WireConnection;20;1;22;0
 WireConnection;0;0;20;0
 ASEEND*/
-//CHKSM=F55E0E171901CB2A5B07323D569AE3A1D4350D10
+//CHKSM=0F1F27879FF9B262FC37668B611E5E3B6B5606AD

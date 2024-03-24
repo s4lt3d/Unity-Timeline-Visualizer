@@ -200,7 +200,7 @@ Shader "Fire2"
                 const half invAlphaPrecision = half(1.0/alphaPrecision);
                 IN.color.a = round(IN.color.a * alphaPrecision)*invAlphaPrecision;
 
-                float4 color5 = IsGammaSpace() ? float4(1,0,0,1) : float4(1,0,0,1);
+                float4 color5 = IsGammaSpace() ? float4(1,1,1,1) : float4(1,1,1,1);
                 float2 texCoord37 = IN.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
                 float temp_output_25_0 = ( texCoord37.y - 0.5 );
                 float2 temp_cast_0 = (texCoord37.x).xx;
@@ -288,12 +288,12 @@ Node;AmplifyShaderEditor.RangedFloatNode;29;-18.65022,-253.4877;Inherit;False;Co
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;58;834.2097,855.0638;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.Compare;28;293.3495,-32.48732;Inherit;True;4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.Compare;64;301.0537,-565.0758;Inherit;True;4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;5;313.2513,-237.2346;Float;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;1,0,0,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;5;313.2513,-237.2346;Float;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;65;1350.822,222.3978;Inherit;True;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;797.5829,24.60763;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;70;1827.128,-32.40115;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;74;1773.27,556.6571;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;74;1773.27,556.6571;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;0.15;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.StickyNoteNode;59;-1979.157,550.8216;Inherit;False;3047.511;1186.025;New Note;;1,1,1,1;Basic Fire;0;0
 Node;AmplifyShaderEditor.LerpOp;73;2329.919,345.4937;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;32;2793.008,334.8137;Float;False;True;-1;2;ASEMaterialInspector;0;3;Fire2;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
@@ -349,4 +349,4 @@ WireConnection;73;1;70;0
 WireConnection;73;2;74;0
 WireConnection;32;0;73;0
 ASEEND*/
-//CHKSM=59C21FB0BDE036458B69904AD6C428CB3830F440
+//CHKSM=95B4C8D78C379C65BEAA09391358E3F4B9D0E8CA

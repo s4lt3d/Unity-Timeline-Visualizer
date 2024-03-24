@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MacroParameters
+public class MacroParametersXMLDTO
 {
     private string id = "";
 
@@ -14,11 +14,12 @@ public class MacroParameters
         set => id = value;
     }
 }
+
 [XmlRoot(ElementName="EDIT")]
-public class WaveformDataSet
+public class WaveformDataSetXMLDTO
 {
-    private List<Transport> transport = new();
-    private List<Track> tracks = new();
+    private List<TransportXMLDTO> transport = new();
+    private List<TrackXMLDTO> tracks = new();
     private string appVersion = "";
     private string projectID = "";
     private string creationTime = "";
@@ -26,14 +27,14 @@ public class WaveformDataSet
     private string modifiedBy = "";
 
     [XmlElement("TRANSPORT")]
-    public List<Transport> Transport
+    public List<TransportXMLDTO> Transport
     {
         get => transport;
         set => transport = value;
     }
 
     [XmlElement("TRACK")]
-    public List<Track> Tracks
+    public List<TrackXMLDTO> Tracks
     {
         get => tracks;
         set => tracks = value;
@@ -75,7 +76,7 @@ public class WaveformDataSet
     }
 }
 
-public class Transport
+public class TransportXMLDTO
 {
     private float endToEnd;
     private float scrubInterval;
@@ -90,7 +91,7 @@ public class Transport
         set { if(float.TryParse(value, out float result)) endToEnd = result;
             else
             {
-                Debug.Log($"endToEnd is invalid {value}");
+                Debug.Log($"endToEndEnd is invalid {value}");
             }
         }
     }
@@ -158,13 +159,13 @@ public static class Util
     
 }
 
-public class Track
+public class TrackXMLDTO
 {
     private string modifiers;
-    private List<MacroParameters> macroParameters;
-    private List<WaveformAudioClip> audioClips;
-    private List<Plugin> plugin;
-    private List<OutputDevices> outputDevices;
+    private List<MacroParametersXMLDTO> macroParameters;
+    private List<WaveformAudioClipXMLDTO> audioClips;
+    private List<PluginXMLDTO> plugin;
+    private List<OutputDevicesXMLDTO> outputDevices;
     private int id;
     private float midiVProp;
     private float midiVOffset;
@@ -179,28 +180,28 @@ public class Track
     }
 
     [XmlElement("MACROPARAMETERS")]
-    public List<MacroParameters> MacroParameters
+    public List<MacroParametersXMLDTO> MacroParameters
     {
         get => macroParameters;
         set => macroParameters = value;
     }
 
     [XmlElement("AUDIOCLIP")]
-    public List<WaveformAudioClip> AudioClips
+    public List<WaveformAudioClipXMLDTO> AudioClips
     {
         get => audioClips;
         set => audioClips = value;
     }
 
     [XmlElement("PLUGIN")]
-    public List<Plugin> Plugin
+    public List<PluginXMLDTO> Plugin
     {
         get => plugin;
         set => plugin = value;
     }
 
     [XmlElement("OUTPUTDEVICES")]
-    public List<OutputDevices> OutputDevices
+    public List<OutputDevicesXMLDTO> OutputDevices
     {
         get => outputDevices;
         set => outputDevices = value;
@@ -263,9 +264,9 @@ public class Track
     }
 }
 
-public class WaveformAudioClip
+public class WaveformAudioClipXMLDTO
 {
-    private List<LoopInfo> loopInfo;
+    private List<LoopInfoXMLDTO> loopInfo;
     private string name;
     private float start;
     private float length;
@@ -282,7 +283,7 @@ public class WaveformAudioClip
     private float fadeOut;
 
     [XmlElement("LOOPINFO")]
-    public List<LoopInfo> LoopInfo
+    public List<LoopInfoXMLDTO> LoopInfo
     {
         get => loopInfo;
         set => loopInfo = value;
@@ -435,7 +436,7 @@ public class WaveformAudioClip
     }
 }
 
-public class LoopInfo
+public class LoopInfoXMLDTO
 {
     private float rootNote;
     private float numBeats;
@@ -548,10 +549,10 @@ public class LoopInfo
     }
 }
 
-public class Plugin
+public class PluginXMLDTO
 {
     private string modifierAssignments;
-    private List<MacroParameters> macroParameters;
+    private List<MacroParametersXMLDTO> macroParameters;
     private string type;
     private string id;
     private string enabled;
@@ -564,7 +565,7 @@ public class Plugin
     }
 
     [XmlElement("MACROPARAMETERS")]
-    public List<MacroParameters> MacroParameters
+    public List<MacroParametersXMLDTO> MacroParameters
     {
         get => macroParameters;
         set => macroParameters = value;
@@ -592,19 +593,19 @@ public class Plugin
     }
 }
 
-public class OutputDevices
+public class OutputDevicesXMLDTO
 {
-    private List<Device> devices;
+    private List<DeviceXMLDTO> devices;
 
     [XmlElement("DEVICE")]
-    public List<Device> Devices
+    public List<DeviceXMLDTO> Devices
     {
         get => devices;
         set => devices = value;
     }
 }
 
-public class Device
+public class DeviceXMLDTO
 {
     private string name;
 

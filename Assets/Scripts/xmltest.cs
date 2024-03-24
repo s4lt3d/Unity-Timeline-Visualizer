@@ -7,7 +7,7 @@ public class xmltest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WaveformFileSerializer serializer = new WaveformFileSerializer();
+        WaveformXMLSerializer serializer = new WaveformXMLSerializer();
         var thing = serializer.LoadFromFile("D:\\UnityGames\\BeatConnect\\Interview.xml");
         serializer.SaveToFile("D:\\UnityGames\\BeatConnect\\Interview_test.xml", thing);
         

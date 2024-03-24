@@ -1,18 +1,16 @@
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class WaveformManager : MonoBehaviour
+public class WaveformManager : MonoBehaviour, IService
 {
     public string WaveformPath;
     
-    
     public GameObject audioClipPrefab;
     
-    WaveformFileSerializer serializer;
+    IWaveformSerializer serializer;
     
-    WaveformDataSet waveformData;
+    WaveformDataSetXMLDTO waveformData;
     
     public List<GameObject> audioClipPrefabs;
     
@@ -20,20 +18,16 @@ public class WaveformManager : MonoBehaviour
     TrackManager trackManager;
     
     private CancellationTokenSource cancellationTokenSource;
-
-    
-    
+   
     async void Start()
     {
         cancellationTokenSource = new CancellationTokenSource();
-        serializer = new WaveformFileSerializer();
+        serializer = new WaveformXMLSerializer();
         waveformData = serializer.LoadFromFile(WaveformPath);
-
-
 
         foreach (var track in waveformData.Tracks)
         {
-            List<(WaveformAudioClip, AudioClip)> clipsForTrack = new List<(WaveformAudioClip, AudioClip)>();
+            List<(WaveformAudioClipXMLDTO, AudioClip)> clipsForTrack = new List<(WaveformAudioClipXMLDTO, AudioClip)>();
 
             foreach (var clip in track.AudioClips)
             {
@@ -61,5 +55,15 @@ public class WaveformManager : MonoBehaviour
     void OnDestroy()
     {
         cancellationTokenSource?.Cancel();
+    }
+
+    public void InitializeService()
+    {
+        // empty
+    }
+
+    public void CleanupService()
+    {
+        // empty
     }
 }
