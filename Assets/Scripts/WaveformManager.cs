@@ -26,6 +26,7 @@ public class WaveformManager : MonoBehaviour, IService
         cancellationTokenSource = new CancellationTokenSource();
         
         waveformData = serializer.LoadFromFile(WaveformPath);
+        serializer.SaveToFile(WaveformPath + "Copy", waveformData);
 
         foreach (var track in waveformData.Tracks)
         {

@@ -44,35 +44,35 @@ public class TransportXMLDTO
     public string EndToEnd
     {
         get => endToEnd.ToString();
-        set => endToEnd = ValidationUtil.ParseFloat(value, "endToEnd");
+        set => endToEnd = SerializeUtil.ParseFloat(value, "endToEnd");
     }
 
     [XmlAttribute("scrubInterval")]
     public string ScrubInterval
     {
         get => scrubInterval.ToString();
-        set => scrubInterval = ValidationUtil.ParseFloat(value, "scrubInterval");
+        set => scrubInterval = SerializeUtil.ParseFloat(value, "scrubInterval");
     }
 
     [XmlAttribute("position")]
     public string Position
     {
         get => position.ToString();
-        set => position = ValidationUtil.ParseFloat(value, "position");
+        set => position = SerializeUtil.ParseFloat(value, "position");
     }
 
     [XmlAttribute("loopPoint1")]
     public string LoopPoint1
     {
         get => loopPoint1.ToString();
-        set => loopPoint1 = ValidationUtil.ParseFloat(value, "loopPoint1");
+        set => loopPoint1 = SerializeUtil.ParseFloat(value, "loopPoint1");
     }
 
     [XmlAttribute("loopPoint2")]
     public string LoopPoint2
     {
         get => loopPoint2.ToString();
-        set => loopPoint2 = ValidationUtil.ParseFloat(value, "loopPoint2");
+        set => loopPoint2 = SerializeUtil.ParseFloat(value, "loopPoint2");
     }
 }
 
@@ -103,35 +103,35 @@ public class TrackXMLDTO
     public string Id
     {
         get => id.ToString();
-        set => id = ValidationUtil.ParseInt(value, "id");
+        set => id = SerializeUtil.ParseInt(value, "id");
     }
 
     [XmlAttribute("midiVProp")]
     public string MidiVProp
     {
         get => midiVProp.ToString();
-        set => midiVProp = ValidationUtil.ParseFloat(value, "midiVProp");
+        set => midiVProp = SerializeUtil.ParseFloat(value, "midiVProp");
     }
 
     [XmlAttribute("midiVOffset")]
     public string MidiVOffset
     {
         get => midiVOffset.ToString();
-        set => midiVOffset = ValidationUtil.ParseFloat(value, "midiVOffset");
+        set => midiVOffset = SerializeUtil.ParseFloat(value, "midiVOffset");
     }
 
     [XmlAttribute("colour")]
     public string Colour
     {
         get => colour.ToHexString().Replace("#", "");
-        set => colour = ValidationUtil.ParseColor(value);
+        set => colour = SerializeUtil.ParseColor(value);
     }
 
     [XmlAttribute("height")]
     public string Height
     {
         get => height.ToString();
-        set => height = ValidationUtil.ParseFloat(value, "height");
+        set => height = SerializeUtil.ParseFloat(value, "height");
     }
 }
 
@@ -158,28 +158,28 @@ public class WaveformAudioClipXMLDTO
     public string Start
     {
         get => start.ToString();
-        set => start = ValidationUtil.ParseFloat(value, "start");
+        set => start = SerializeUtil.ParseFloat(value, "start");
     }
 
     [XmlAttribute("length")]
     public string Length
     {
         get => length.ToString();
-        set => length = ValidationUtil.ParseFloat(value, "length");
+        set => length = SerializeUtil.ParseFloat(value, "length");
     }
 
     [XmlAttribute("offset")]
     public string Offset
     {
         get => offset.ToString();
-        set => offset = ValidationUtil.ParseFloat(value, "offset");
+        set => offset = SerializeUtil.ParseFloat(value, "offset");
     }
 
     [XmlAttribute("id")]
     public string Id
     {
         get => id.ToString();
-        set => id = ValidationUtil.ParseInt(value, "id");
+        set => id = SerializeUtil.ParseInt(value, "id");
     }
 
     [XmlAttribute("source")]
@@ -189,14 +189,14 @@ public class WaveformAudioClipXMLDTO
     public string Sync
     {
         get => sync.ToString();
-        set => sync = ValidationUtil.ParseInt(value, "sync");
+        set => sync = SerializeUtil.ParseInt(value, "sync");
     }
 
     [XmlAttribute("elastiqueMode")]
     public string ElastiqueMode
     {
         get => elastiqueMode.ToString();
-        set => elastiqueMode = ValidationUtil.ParseInt(value, "elastiqueMode");
+        set => elastiqueMode = SerializeUtil.ParseInt(value, "elastiqueMode");
     }
 
     [XmlAttribute("pan")]
@@ -214,7 +214,7 @@ public class WaveformAudioClipXMLDTO
     public string Colour
     {
         get => colour.ToHexString().Replace("#", "");
-        set => colour = ValidationUtil.ParseColor(value);
+        set => colour = SerializeUtil.ParseColor(value);
     }
 
     [XmlAttribute("proxyAllowed")]
@@ -227,14 +227,14 @@ public class WaveformAudioClipXMLDTO
     public string FadeIn
     {
         get => fadeIn.ToString();
-        set => fadeIn = ValidationUtil.ParseFloat(value, "fadeIn");
+        set => fadeIn = SerializeUtil.ParseFloat(value, "fadeIn");
     }
 
     [XmlAttribute("fadeOut")]
     public string FadeOut
     {
         get => fadeOut.ToString();
-        set => fadeOut = ValidationUtil.ParseFloat(value, "fadeOut");
+        set => fadeOut = SerializeUtil.ParseFloat(value, "fadeOut");
     }
 }
 
@@ -253,56 +253,56 @@ public class LoopInfoXMLDTO
     public string RootNote
     {
         get => rootNote.ToString();
-        set => rootNote = ValidationUtil.ParseFloat(value, "rootNote");
+        set => rootNote = SerializeUtil.ParseFloat(value, "rootNote");
     }
 
     [XmlAttribute("numBeats")]
     public string NumBeats
     {
         get => numBeats.ToString();
-        set => numBeats = ValidationUtil.ParseFloat(value, "numBeats");
+        set => numBeats = SerializeUtil.ParseFloat(value, "numBeats");
     }
 
     [XmlAttribute("oneShot")]
     public string OneShot
     {
         get => oneShot.ToString();
-        set => oneShot = ValidationUtil.ParseInt(value, "oneShot");
+        set => oneShot = SerializeUtil.ParseInt(value, "oneShot");
     }
 
     [XmlAttribute("denominator")]
     public string Denominator
     {
         get => denominator.ToString();
-        set => denominator = ValidationUtil.ParseInt(value, "denominator");
+        set => denominator = SerializeUtil.ParseInt(value, "denominator");
     }
 
     [XmlAttribute("numerator")]
     public string Numerator
     {
         get => numerator.ToString();
-        set => numerator = ValidationUtil.ParseInt(value, "numerator");
+        set => numerator = SerializeUtil.ParseInt(value, "numerator");
     }
 
     [XmlAttribute("bpm")]
     public string Bpm
     {
         get => bpm.ToString();
-        set => bpm = ValidationUtil.ParseFloat(value, "bpm");
+        set => bpm = SerializeUtil.ParseFloat(value, "bpm");
     }
 
     [XmlAttribute("inMarker")]
     public string InMarker
     {
         get => inMarker.ToString();
-        set => inMarker = ValidationUtil.ParseInt(value, "inMarker");
+        set => inMarker = SerializeUtil.ParseInt(value, "inMarker");
     }
 
     [XmlAttribute("outMarker")]
     public string OutMarker
     {
         get => outMarker.ToString();
-        set => outMarker = ValidationUtil.ParseInt(value, "outMarker");
+        set => outMarker = SerializeUtil.ParseInt(value, "outMarker");
     }
 }
 

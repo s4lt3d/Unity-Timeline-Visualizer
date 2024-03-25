@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
-public class ValidationUtil
+public class SerializeUtil
 {
     public static float ParseFloat(string stringValue, string name="", float defaultValue = 0f)
     {
@@ -36,5 +37,10 @@ public class ValidationUtil
          
         Debug.Log($"Invalid color. name: {name}, value: {stringValue}");
         return Color.red;
+    }
+    
+    public static string SerializeColor(Color color)
+    {
+        return color.ToHexString().Replace("#", "").ToLower();
     }
 }
