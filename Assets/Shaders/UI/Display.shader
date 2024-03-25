@@ -167,7 +167,7 @@ Shader "SmallCircleGrid"
 }
 /*ASEBEGIN
 Version=19302
-Node;AmplifyShaderEditor.Vector2Node;37;-880.6591,-457.4239;Inherit;False;InstancedProperty;_GridSize;GridSize;0;0;Create;True;0;0;0;False;0;False;50,20;50,20;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;37;-880.6591,-457.4239;Inherit;False;InstancedProperty;_GridSize;GridSize;0;0;Create;True;0;0;0;False;0;False;50,20;15,5;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.TextureCoordinatesNode;33;-645.436,-499.9438;Inherit;True;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.FractNode;36;-356.5673,-501.4654;Inherit;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;44;-182.6987,-375.7908;Inherit;False;Constant;_Float2;Float 0;0;0;Create;True;0;0;0;False;0;False;-0.5;0;0;0;0;1;FLOAT;0
@@ -176,11 +176,7 @@ Node;AmplifyShaderEditor.DistanceOpNode;52;308.845,-746.636;Inherit;True;2;0;FLO
 Node;AmplifyShaderEditor.RangedFloatNode;53;478.845,-416.636;Inherit;False;Constant;_Float3;Float 0;0;0;Create;True;0;0;0;False;0;False;0.2;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;54;555.845,-326.636;Inherit;False;Constant;_Float4;Float 0;0;0;Create;True;0;0;0;False;0;False;0.17;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SmoothstepOpNode;50;1028.845,-660.636;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;56;1054.801,-947.9253;Inherit;False;InstancedProperty;_GridColor;GridColor;1;1;[HDR];Create;True;0;0;0;False;0;False;0.3058824,0.4,0.5254902,1;0.0382353,0.05,0.06568628,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;40;47.85449,95.22766;Inherit;False;Constant;_Float1;Float 1;0;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.Compare;38;545.4568,-98.78955;Inherit;True;4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.BreakToComponentsNode;51;119.845,-831.636;Inherit;False;FLOAT;1;0;FLOAT;0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
-Node;AmplifyShaderEditor.RangedFloatNode;39;38.85449,-17.77234;Inherit;False;Constant;_Float0;Float 0;0;0;Create;True;0;0;0;False;0;False;0.12;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;56;1054.801,-947.9253;Inherit;False;InstancedProperty;_GridColor;GridColor;1;1;[HDR];Create;True;0;0;0;False;0;False;0.3058824,0.4,0.5254902,1;0.7333333,0.6196079,0.4392157,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;57;1341.801,-906.9253;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;26;1678.19,-661.1426;Float;False;True;-1;2;ASEMaterialInspector;0;3;SmallCircleGrid;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;33;0;37;0
@@ -191,10 +187,8 @@ WireConnection;52;0;43;0
 WireConnection;50;0;52;0
 WireConnection;50;1;53;0
 WireConnection;50;2;54;0
-WireConnection;38;1;39;0
-WireConnection;38;2;40;0
 WireConnection;57;0;56;0
 WireConnection;57;1;50;0
 WireConnection;26;0;57;0
 ASEEND*/
-//CHKSM=FFBD109EA46FA8D4528D6C28E97E12E10FAA0D5E
+//CHKSM=F18C05AB5487E768543071B0BBF68BCDC49B8F94

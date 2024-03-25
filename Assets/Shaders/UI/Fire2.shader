@@ -222,7 +222,7 @@ Shader "Fire2"
                 float2 id40 = 0;
                 float2 uv40 = 0;
                 float voroi40 = voronoi40( coords40, time40, id40, uv40, 0, voronoiSmoothId40 );
-                float4 lerpResult70 = lerp( temp_output_23_0 , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , 0.0);
+                float4 lerpResult70 = lerp( temp_output_23_0 , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , 3.0);
                 float _FireLerp_Instance = UNITY_ACCESS_INSTANCED_PROP(_FireLerp_arr, _FireLerp);
                 float4 lerpResult73 = lerp( temp_output_23_0 , lerpResult70 , _FireLerp_Instance);
                 
@@ -280,18 +280,18 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;56;144.4268,1252.248;Inherit;True;
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;25;-620.7241,-449.7159;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;63;-377.4437,-583.8088;Inherit;False;Constant;_Float8;Float 8;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;9;-47.77532,88.23344;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;55;267.6939,674.1199;Inherit;False;Constant;_Color1;Color 1;2;1;[HDR];Create;True;0;0;0;False;0;False;35.30828,7.0122,2.498227,0.3686275;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;57;480.4989,1094.467;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.AbsOpNode;27;-289.3198,-255.6033;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;62;-169.4437,-576.8088;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;29;-18.65022,-253.4877;Inherit;False;Constant;_Float2;Float 2;1;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;55;267.6939,674.1199;Inherit;False;Constant;_Color1;Color 1;2;1;[HDR];Create;True;0;0;0;False;0;False;35.30828,7.0122,2.498227,0.3686275;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;58;834.2097,855.0638;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.Compare;28;293.3495,-32.48732;Inherit;True;4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.Compare;64;301.0537,-565.0758;Inherit;True;4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ColorNode;5;313.2513,-237.2346;Float;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;65;1350.822,222.3978;Inherit;True;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;797.5829,24.60763;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;3;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;70;1827.128,-32.40115;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;74;1773.27,556.6571;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;0.15;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.StickyNoteNode;59;-1979.157,550.8216;Inherit;False;3047.511;1186.025;New Note;;1,1,1,1;Basic Fire;0;0
@@ -349,4 +349,4 @@ WireConnection;73;1;70;0
 WireConnection;73;2;74;0
 WireConnection;32;0;73;0
 ASEEND*/
-//CHKSM=95B4C8D78C379C65BEAA09391358E3F4B9D0E8CA
+//CHKSM=E1083C6C9B478B21A6108A617C7EBC089D23807A
