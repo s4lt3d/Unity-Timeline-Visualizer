@@ -3,390 +3,210 @@ using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MacroParametersXMLDTO
-{
-    private string id = "";
-
-    [XmlAttribute("id")]
-    public string Id
-    {
-        get => id;
-        set => id = value;
-    }
-}
-
-[XmlRoot(ElementName="EDIT")]
+[XmlRoot(ElementName = "EDIT")]
 public class WaveformDataSetXMLDTO
 {
-    private List<TransportXMLDTO> transport = new();
-    private List<TrackXMLDTO> tracks = new();
-    private string appVersion = "";
-    private string projectID = "";
-    private string creationTime = "";
-    private string lastSignificantChange = "";
-    private string modifiedBy = "";
-
     [XmlElement("TRANSPORT")]
-    public List<TransportXMLDTO> Transport
-    {
-        get => transport;
-        set => transport = value;
-    }
+    public List<TransportXMLDTO> Transport { get; set; } = new();
 
     [XmlElement("TRACK")]
-    public List<TrackXMLDTO> Tracks
-    {
-        get => tracks;
-        set => tracks = value;
-    }
+    public List<TrackXMLDTO> Tracks { get; set; } = new();
 
     [XmlAttribute("appVersion")]
-    public string AppVersion
-    {
-        get => appVersion;
-        set => appVersion = value;
-    }
+    public string AppVersion { get; set; } = "";
 
     [XmlAttribute("projectID")]
-    public string ProjectID
-    {
-        get => projectID;
-        set => projectID = value;
-    }
+    public string ProjectID { get; set; } = "";
 
     [XmlAttribute("creationTime")]
-    public string CreationTime
-    {
-        get => creationTime;
-        set => creationTime = value;
-    }
+    public string CreationTime { get; set; } = "";
 
     [XmlAttribute("lastSignificantChange")]
-    public string LastSignificantChange
-    {
-        get => lastSignificantChange;
-        set => lastSignificantChange = value;
-    }
+    public string LastSignificantChange { get; set; } = "";
 
     [XmlAttribute("modifiedBy")]
-    public string ModifiedBy
-    {
-        get => modifiedBy;
-        set => modifiedBy = value;
-    }
+    public string ModifiedBy { get; set; } = "";
 }
-
+public class MacroParametersXMLDTO
+{
+    [XmlAttribute("id")]
+    public string Id { get; set; } = "";
+}
 public class TransportXMLDTO
 {
     private float endToEnd;
-    private float scrubInterval;
-    private float position;
     private float loopPoint1;
     private float loopPoint2;
+    private float position;
+    private float scrubInterval;
 
     [XmlAttribute("endToEnd")]
     public string EndToEnd
     {
         get => endToEnd.ToString();
-        set { if(float.TryParse(value, out float result)) endToEnd = result;
-            else
-            {
-                Debug.Log($"endToEndEnd is invalid {value}");
-            }
-        }
+        set => endToEnd = ValidationUtil.ParseFloat(value, "endToEnd");
     }
 
     [XmlAttribute("scrubInterval")]
     public string ScrubInterval
     {
         get => scrubInterval.ToString();
-        set { if(float.TryParse(value, out float result)) scrubInterval = result;
-            else
-            {
-                Debug.Log($"scrubInterval is invalid {value}");
-            }
-        }
+        set => scrubInterval = ValidationUtil.ParseFloat(value, "scrubInterval");
     }
 
     [XmlAttribute("position")]
     public string Position
     {
         get => position.ToString();
-        set { if(float.TryParse(value, out float result)) position = result;
-            else
-            {
-                Debug.Log($"position is invalid {value}");
-            }
-        }
+        set => position = ValidationUtil.ParseFloat(value, "position");
     }
 
     [XmlAttribute("loopPoint1")]
     public string LoopPoint1
     {
         get => loopPoint1.ToString();
-        set { if(float.TryParse(value, out float result)) loopPoint1 = result;
-            else
-            {
-                Debug.Log($"loopPoint1 is invalid {value}");
-            }
-        }
+        set => loopPoint1 = ValidationUtil.ParseFloat(value, "loopPoint1");
     }
 
     [XmlAttribute("loopPoint2")]
     public string LoopPoint2
     {
         get => loopPoint2.ToString();
-        set { if(float.TryParse(value, out float result)) loopPoint2 = result;
-            else
-            {
-                Debug.Log($"loopPoint2 is invalid {value}");
-            }
-        }
+        set => loopPoint2 = ValidationUtil.ParseFloat(value, "loopPoint2");
     }
-}
-
-public static class Util
-{
-    public static Color ParseColor(string value)
-    {
-        var val = value.StartsWith("#") ? value : "#" + value;
-        if(UnityEngine.ColorUtility.TryParseHtmlString(val, out Color result))
-            return result;
-         
-        Debug.Log($"colour is invalid: {value}");
-        return Color.red;
-    }
-    
 }
 
 public class TrackXMLDTO
 {
-    private string modifiers;
-    private List<MacroParametersXMLDTO> macroParameters;
-    private List<WaveformAudioClipXMLDTO> audioClips;
-    private List<PluginXMLDTO> plugin;
-    private List<OutputDevicesXMLDTO> outputDevices;
-    private int id;
-    private float midiVProp;
-    private float midiVOffset;
     private Color colour = Color.red;
     private float height;
+    private int id;
+    private float midiVOffset;
+    private float midiVProp;
 
     [XmlElement("MODIFIERS")]
-    public string Modifiers
-    {
-        get => modifiers;
-        set => modifiers = value;
-    }
+    public string Modifiers { get; set; }
 
     [XmlElement("MACROPARAMETERS")]
-    public List<MacroParametersXMLDTO> MacroParameters
-    {
-        get => macroParameters;
-        set => macroParameters = value;
-    }
+    public List<MacroParametersXMLDTO> MacroParameters { get; set; }
 
     [XmlElement("AUDIOCLIP")]
-    public List<WaveformAudioClipXMLDTO> AudioClips
-    {
-        get => audioClips;
-        set => audioClips = value;
-    }
+    public List<WaveformAudioClipXMLDTO> AudioClips { get; set; }
 
     [XmlElement("PLUGIN")]
-    public List<PluginXMLDTO> Plugin
-    {
-        get => plugin;
-        set => plugin = value;
-    }
+    public List<PluginXMLDTO> Plugin { get; set; }
 
     [XmlElement("OUTPUTDEVICES")]
-    public List<OutputDevicesXMLDTO> OutputDevices
-    {
-        get => outputDevices;
-        set => outputDevices = value;
-    }
+    public List<OutputDevicesXMLDTO> OutputDevices { get; set; }
 
     [XmlAttribute("id")]
     public string Id
     {
         get => id.ToString();
-        set {
-            if(int.TryParse(value, out int result)) id = result;
-            else
-            {
-                Debug.Log($"id is invalid: {id}");
-            }
-        }
+        set => id = ValidationUtil.ParseInt(value, "id");
     }
 
     [XmlAttribute("midiVProp")]
     public string MidiVProp
     {
         get => midiVProp.ToString();
-        set { if(float.TryParse(value, out float result)) midiVProp = result;
-            else
-            {
-                Debug.Log($"midiVProp is invalid {value}");
-            }
-        }
+        set => midiVProp = ValidationUtil.ParseFloat(value, "midiVProp");
     }
 
     [XmlAttribute("midiVOffset")]
     public string MidiVOffset
     {
         get => midiVOffset.ToString();
-        set { if(float.TryParse(value, out float result)) midiVOffset = result;
-            else
-            {
-                Debug.Log($"midiVOffset is invalid {value}");
-            }
-        }
+        set => midiVOffset = ValidationUtil.ParseFloat(value, "midiVOffset");
     }
 
     [XmlAttribute("colour")]
     public string Colour
     {
         get => colour.ToHexString().Replace("#", "");
-        set { colour = Util.ParseColor(value); }
+        set => colour = ValidationUtil.ParseColor(value);
     }
 
     [XmlAttribute("height")]
     public string Height
     {
         get => height.ToString();
-        set { if(float.TryParse(value, out float result)) height = result;
-            else
-            {
-                Debug.Log($"height is invalid {value}");
-            }
-        }
+        set => height = ValidationUtil.ParseFloat(value, "height");
     }
 }
 
 public class WaveformAudioClipXMLDTO
 {
-    private List<LoopInfoXMLDTO> loopInfo;
-    private string name;
-    private float start;
-    private float length;
-    private float offset;
-    private int id;
-    private string source;
-    private int sync;
-    private int elastiqueMode;
-    private float pan;
     private Color colour;
-    private string proxyAllowed;
-    private string resamplingQuality;
+    private int elastiqueMode;
     private float fadeIn;
     private float fadeOut;
+    private int id;
+    private float length;
+    private float offset;
+    private float pan;
+    private float start;
+    private int sync;
 
     [XmlElement("LOOPINFO")]
-    public List<LoopInfoXMLDTO> LoopInfo
-    {
-        get => loopInfo;
-        set => loopInfo = value;
-    }
+    public List<LoopInfoXMLDTO> LoopInfo { get; set; }
 
     [XmlAttribute("name")]
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+    public string Name { get; set; }
 
     [XmlAttribute("start")]
     public string Start
     {
         get => start.ToString();
-        set { if(float.TryParse(value, out float result)) start = result;
-            else
-            {
-                Debug.Log($"start is invalid {value}");
-            }
-        }
+        set => start = ValidationUtil.ParseFloat(value, "start");
     }
 
     [XmlAttribute("length")]
     public string Length
     {
         get => length.ToString();
-        set { if(float.TryParse(value, out float result)) length = result;
-            else
-            {
-                Debug.Log($"length is invalid {value}");
-            }
-        }
+        set => length = ValidationUtil.ParseFloat(value, "length");
     }
 
     [XmlAttribute("offset")]
     public string Offset
     {
         get => offset.ToString();
-        set { if(float.TryParse(value, out float result)) offset = result;
-            else
-            {
-                Debug.Log($"offset is invalid {value}");
-            }
-        }
+        set => offset = ValidationUtil.ParseFloat(value, "offset");
     }
 
     [XmlAttribute("id")]
     public string Id
     {
         get => id.ToString();
-        set {
-            if(int.TryParse(value, out int result)) id = result;
-            else
-            {
-                Debug.Log($"id is invalid: {id}");
-            }
-        }
+        set => id = ValidationUtil.ParseInt(value, "id");
     }
 
     [XmlAttribute("source")]
-    public string Source
-    {
-        get => source;
-        set => source = value;
-    }
+    public string Source { get; set; }
 
     [XmlAttribute("sync")]
     public string Sync
     {
         get => sync.ToString();
-        set {
-            if(int.TryParse(value, out int result)) sync = result;
-            else
-            {
-                Debug.Log($"sync is invalid: {sync}");
-            }
-        }
+        set => sync = ValidationUtil.ParseInt(value, "sync");
     }
 
     [XmlAttribute("elastiqueMode")]
     public string ElastiqueMode
     {
         get => elastiqueMode.ToString();
-        set {
-            if(int.TryParse(value, out int result)) elastiqueMode = result;
-            else
-            {
-                Debug.Log($"elastiqueMode is invalid: {elastiqueMode}");
-            }
-        }
+        set => elastiqueMode = ValidationUtil.ParseInt(value, "elastiqueMode");
     }
 
     [XmlAttribute("pan")]
     public string Pan
     {
         get => pan.ToString();
-        set { if(float.TryParse(value, out float result)) pan = result;
-            else
-            {
-                Debug.Log($"pan is invalid {value}");
-            }
+        set
+        {
+            if (float.TryParse(value, out var result)) pan = result;
+            else Debug.Log($"pan is invalid {value}");
         }
     }
 
@@ -394,225 +214,124 @@ public class WaveformAudioClipXMLDTO
     public string Colour
     {
         get => colour.ToHexString().Replace("#", "");
-        set { colour = Util.ParseColor(value); }
+        set => colour = ValidationUtil.ParseColor(value);
     }
 
     [XmlAttribute("proxyAllowed")]
-    public string ProxyAllowed
-    {
-        get => proxyAllowed;
-        set => proxyAllowed = value;
-    }
+    public string ProxyAllowed { get; set; }
 
     [XmlAttribute("resamplingQuality")]
-    public string ResamplingQuality
-    {
-        get => resamplingQuality;
-        set => resamplingQuality = value;
-    }
+    public string ResamplingQuality { get; set; }
 
     [XmlAttribute("fadeIn")]
     public string FadeIn
     {
         get => fadeIn.ToString();
-        set { if(float.TryParse(value, out float result)) fadeIn = result;
-            else
-            {
-                Debug.Log($"fadeIn is invalid {value}");
-            }
-        }
+        set => fadeIn = ValidationUtil.ParseFloat(value, "fadeIn");
     }
 
     [XmlAttribute("fadeOut")]
     public string FadeOut
     {
         get => fadeOut.ToString();
-        set { if(float.TryParse(value, out float result)) fadeOut = result;
-            else
-            {
-                Debug.Log($"fadeOut is invalid {value}");
-            }
-        }
+        set => fadeOut = ValidationUtil.ParseFloat(value, "fadeOut");
     }
 }
 
 public class LoopInfoXMLDTO
 {
-    private float rootNote;
-    private float numBeats;
-    private int oneShot;
-    private int denominator;
-    private int numerator;
     private float bpm;
+    private int denominator;
     private int inMarker;
+    private float numBeats;
+    private int numerator;
+    private int oneShot;
     private int outMarker;
+    private float rootNote;
 
     [XmlAttribute("rootNote")]
     public string RootNote
     {
         get => rootNote.ToString();
-        set { if(float.TryParse(value, out float result)) rootNote = result;
-            else
-            {
-                Debug.Log($"rootNote is invalid {value}");
-            }
-        }
+        set => rootNote = ValidationUtil.ParseFloat(value, "rootNote");
     }
 
     [XmlAttribute("numBeats")]
     public string NumBeats
     {
         get => numBeats.ToString();
-        set { if(float.TryParse(value, out float result)) numBeats = result;
-            else
-            {
-                Debug.Log($"numBeats is invalid {value}");
-            }
-        }
+        set => numBeats = ValidationUtil.ParseFloat(value, "numBeats");
     }
 
     [XmlAttribute("oneShot")]
     public string OneShot
     {
         get => oneShot.ToString();
-        set {
-            if(int.TryParse(value, out int result)) oneShot = result;
-            else
-            {
-                Debug.Log($"oneShot is invalid: {oneShot}");
-            }
-        }
+        set => oneShot = ValidationUtil.ParseInt(value, "oneShot");
     }
 
     [XmlAttribute("denominator")]
     public string Denominator
     {
         get => denominator.ToString();
-        set {
-            if(int.TryParse(value, out int result)) denominator = result;
-            else
-            {
-                Debug.Log($"denominator is invalid: {denominator}");
-            }
-        }
+        set => denominator = ValidationUtil.ParseInt(value, "denominator");
     }
 
     [XmlAttribute("numerator")]
     public string Numerator
     {
         get => numerator.ToString();
-        set {
-            if(int.TryParse(value, out int result)) numerator = result;
-            else
-            {
-                Debug.Log($"numerator is invalid: {numerator}");
-            }
-        }
+        set => numerator = ValidationUtil.ParseInt(value, "numerator");
     }
 
     [XmlAttribute("bpm")]
     public string Bpm
     {
         get => bpm.ToString();
-        set { if(float.TryParse(value, out float result)) bpm = result;
-            else
-            {
-                Debug.Log($"bpm is invalid {value}");
-            }
-        }
+        set => bpm = ValidationUtil.ParseFloat(value, "bpm");
     }
 
     [XmlAttribute("inMarker")]
     public string InMarker
     {
         get => inMarker.ToString();
-        set {
-            if(int.TryParse(value, out int result)) inMarker = result;
-            else
-            {
-                Debug.Log($"inMarker is invalid: {inMarker}");
-            }
-        }
+        set => inMarker = ValidationUtil.ParseInt(value, "inMarker");
     }
 
     [XmlAttribute("outMarker")]
     public string OutMarker
     {
         get => outMarker.ToString();
-        set {
-            if(int.TryParse(value, out int result)) outMarker = result;
-            else
-            {
-                Debug.Log($"outMarker is invalid: {outMarker}");
-            }
-        }
+        set => outMarker = ValidationUtil.ParseInt(value, "outMarker");
     }
 }
 
 public class PluginXMLDTO
 {
-    private string modifierAssignments;
-    private List<MacroParametersXMLDTO> macroParameters;
-    private string type;
-    private string id;
-    private string enabled;
-
     [XmlElement("MODIFIERASSIGNMENTS")]
-    public string ModifierAssignments
-    {
-        get => modifierAssignments;
-        set => modifierAssignments = value;
-    }
+    public string ModifierAssignments { get; set; }
 
     [XmlElement("MACROPARAMETERS")]
-    public List<MacroParametersXMLDTO> MacroParameters
-    {
-        get => macroParameters;
-        set => macroParameters = value;
-    }
+    public List<MacroParametersXMLDTO> MacroParameters { get; set; }
 
     [XmlAttribute("type")]
-    public string Type
-    {
-        get => type;
-        set => type = value;
-    }
+    public string Type { get; set; }
 
     [XmlAttribute("id")]
-    public string Id
-    {
-        get => id;
-        set => id = value;
-    }
+    public string Id { get; set; }
 
     [XmlAttribute("enabled")]
-    public string Enabled
-    {
-        get => enabled;
-        set => enabled = value;
-    }
+    public string Enabled { get; set; }
 }
 
 public class OutputDevicesXMLDTO
 {
-    private List<DeviceXMLDTO> devices;
-
     [XmlElement("DEVICE")]
-    public List<DeviceXMLDTO> Devices
-    {
-        get => devices;
-        set => devices = value;
-    }
+    public List<DeviceXMLDTO> Devices { get; set; }
 }
 
 public class DeviceXMLDTO
 {
-    private string name;
-
     [XmlAttribute("name")]
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+    public string Name { get; set; }
 }

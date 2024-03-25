@@ -17,7 +17,7 @@ public class TrackManager : MonoBehaviour
     public float clipScale = 100;
 
     // Adds all clips to a new track
-    public void AddTrack(List<(WaveformDataSet, AudioClip)> clips)
+    public void AddTrack(List<(WaveformAudioClip, AudioClip)> clips)
     {
         var newClipTrack = Instantiate(TrackPrefab, TrackPanel.transform);
         var newControlTrack = Instantiate(TrackControlPrefab, TrackControlPanel.transform);
@@ -36,7 +36,7 @@ public class TrackManager : MonoBehaviour
             var newClip = Instantiate(ClipPrefab, newClipTrack.transform);
             var clipRectTransform = newClip.GetComponent<RectTransform>();
             clipRectTransform.sizeDelta = new Vector2(clipLength * clipScale, 10);
-            clipRectTransform.anchoredPosition = new Vector2(audioClip.Start * clipScale, 0);
+            clipRectTransform.anchoredPosition = new Vector2(waveformClip.Start * clipScale, 0);
             clipRectTransform.pivot = new Vector2(0, 0);
 
             var clipVisualizer = newClip.GetComponent<ClipAudioVisualizer>();

@@ -10,7 +10,7 @@ public class WaveformManager : MonoBehaviour, IService
     
     IWaveformSerializer serializer;
     
-    WaveformDataSetXMLDTO waveformData;
+    WaveformDataSet waveformData;
     
     public List<GameObject> audioClipPrefabs;
     
@@ -21,13 +21,15 @@ public class WaveformManager : MonoBehaviour, IService
    
     async void Start()
     {
+        serializer = ServiceLocator.GetService<IWaveformSerializer>();
+        
         cancellationTokenSource = new CancellationTokenSource();
-        serializer = new WaveformXMLSerializer();
+        
         waveformData = serializer.LoadFromFile(WaveformPath);
 
         foreach (var track in waveformData.Tracks)
         {
-            List<(WaveformAudioClipXMLDTO, AudioClip)> clipsForTrack = new List<(WaveformAudioClipXMLDTO, AudioClip)>();
+            List<(WaveformAudioClip, AudioClip)> clipsForTrack = new List<(WaveformAudioClip, AudioClip)>();
 
             foreach (var clip in track.AudioClips)
             {
