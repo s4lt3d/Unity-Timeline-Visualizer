@@ -56,5 +56,5 @@ The aim of this project is to develop a Unity project that can read a provided X
 - Expanding on the versioning of the data, a workspace history would work similar to git's version history with branching, authorship, history, and tags. This would allow multiple people to work on a project together and be able to share the results. They would also be able to go back and forth in edits to tune their project. 
 
 ## Discussions
-- **Custom Shader Development:** A basic implementation of a fragment shader was written by hand. However, utilizing a visual shader tool is significantly easier and provides the same benefits and a hand written shader. 
-- The shader graph used was Amiplify Shader Editor which provides the raw shader code if performance tweaking becomes nessecary. This editors supports all supported platforms and allows the designer to quickly specify all fallbacks if needed. 
+- **Custom Shader Development:** A basic implementation of a fragment shader was written by hand. However, utilizing a visual shader tool is significantly easier and provides the same benefits and a hand written shader. The performance difference between graph and hand written code usually only comes down to the knowledge of the author in all cases and there is no performance hit for using a graph editor. 
+- The shader graph used was Amiplify Shader Editor which provides the raw shader code if performance tweaking becomes nessecary. This editors supports all Unity supported platforms and consoles and allows the designer to quickly specify all fallbacks if needed. 
