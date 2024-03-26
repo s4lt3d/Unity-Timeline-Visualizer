@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-[ExecuteAlways]
 public class FrequencyBar : MonoBehaviour
 {
     private Material imageMaterial;

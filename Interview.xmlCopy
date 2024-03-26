@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-16"?>
+<EDIT xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" appVersion="Waveform 12.1.8" projectID="4d3600/1b6ec40" creationTime="1710514868809" lastSignificantChange="18e42a2b72e" modifiedBy="nlaroche">
+  <TRANSPORT endToEnd="1" scrubInterval="0.3613491" position="0" loopPoint1="0" loopPoint2="0" />
+  <TRACK id="1006" midiVProp="0.28125" midiVOffset="0.359375" colour="FFFF0000" height="59.4378">
+    <MODIFIERS />
+    <MACROPARAMETERS id="1007" />
+    <AUDIOCLIP name="[90bpm] Cabasa(2)" start="0" length="2.666667" offset="0" id="1065" source="4d3600/a71a72" sync="0" elastiqueMode="0" pan="0" colour="FFFF0000" proxyAllowed="1" resamplingQuality="lagrange" fadeIn="0" fadeOut="0">
+      <LOOPINFO rootNote="-1" numBeats="4" oneShot="0" denominator="4" numerator="4" bpm="0" inMarker="0" outMarker="-1" />
+    </AUDIOCLIP>
+    <AUDIOCLIP name="[90bpm] Cabasa(2)" start="2.666667" length="2.666667" offset="0" id="1066" source="4d3600/a71a72" sync="0" elastiqueMode="0" pan="0" colour="FFFF0000" proxyAllowed="1" resamplingQuality="lagrange" fadeIn="0" fadeOut="0">
+      <LOOPINFO rootNote="-1" numBeats="4" oneShot="0" denominator="4" numerator="4" bpm="0" inMarker="0" outMarker="-1" />
+    </AUDIOCLIP>
+    <AUDIOCLIP name="[90bpm] Cabasa(2)" start="5.333333" length="2.666667" offset="0" id="1070" source="4d3600/a71a72" sync="0" elastiqueMode="0" pan="0" colour="FFFF0000" proxyAllowed="1" resamplingQuality="lagrange" fadeIn="0" fadeOut="0">
+      <LOOPINFO rootNote="-1" numBeats="4" oneShot="0" denominator="4" numerator="4" bpm="0" inMarker="0" outMarker="-1" />
+    </AUDIOCLIP>
+    <PLUGIN type="volume" id="1008" enabled="1">
+      <MODIFIERASSIGNMENTS />
+      <MACROPARAMETERS id="1009" />
+    </PLUGIN>
+    <PLUGIN type="level" id="1010" enabled="1">
+      <MACROPARAMETERS id="1011" />
+    </PLUGIN>
+    <OUTPUTDEVICES>
+      <DEVICE name="(default audio output)" />
+    </OUTPUTDEVICES>
+  </TRACK>
+  <TRACK id="1012" midiVProp="0.28125" midiVOffset="0.359375" colour="FFFFAA00" height="59.4378">
+    <MODIFIERS />
+    <MACROPARAMETERS id="1013" />
+    <PLUGIN type="volume" id="1014" enabled="1">
+      <MODIFIERASSIGNMENTS />
+      <MACROPARAMETERS id="1015" />
+    </PLUGIN>
+    <PLUGIN type="level" id="1016" enabled="1">
+      <MACROPARAMETERS id="1017" />
+    </PLUGIN>
+    <OUTPUTDEVICES>
+      <DEVICE name="(default audio output)" />
+    </OUTPUTDEVICES>
+  </TRACK>
+  <TRACK id="1024" midiVProp="0.28125" midiVOffset="0.359375" colour="FF00FF00" height="59.4378">
+    <MODIFIERS />
+    <MACROPARAMETERS id="1025" />
+    <AUDIOCLIP name="[90bpm] Guiro Neptunes" start="2.666667" length="2.666667" offset="0" id="1068" source="4d3600/e3ee45" sync="0" elastiqueMode="0" pan="0" colour="FF00FF00" proxyAllowed="1" resamplingQuality="lagrange" fadeIn="0" fadeOut="0">
+      <LOOPINFO rootNote="-1" numBeats="4" oneShot="0" denominator="4" numerator="4" bpm="0" inMarker="0" outMarker="-1" />
+    </AUDIOCLIP>
+    <AUDIOCLIP name="[90bpm] Guiro Neptunes" start="5.333333" length="2.666667" offset="0" id="1069" source="4d3600/e3ee45" sync="0" elastiqueMode="0" pan="0" colour="FF00FF00" proxyAllowed="1" resamplingQuality="lagrange" fadeIn="0" fadeOut="0">
+      <LOOPINFO rootNote="-1" numBeats="4" oneShot="0" denominator="4" numerator="4" bpm="0" inMarker="0" outMarker="-1" />
+    </AUDIOCLIP>
+    <PLUGIN type="volume" id="1026" enabled="1">
+      <MODIFIERASSIGNMENTS />
+      <MACROPARAMETERS id="1027" />
+    </PLUGIN>
+    <PLUGIN type="level" id="1028" enabled="1">
+      <MACROPARAMETERS id="1029" />
+    </PLUGIN>
+    <OUTPUTDEVICES>
+      <DEVICE name="(default audio output)" />
+    </OUTPUTDEVICES>
+  </TRACK>
+  <TRACK id="1042" midiVProp="0.28125" midiVOffset="0.359375" colour="FF0000FF" height="59.4378">
+    <MODIFIERS />
+    <MACROPARAMETERS id="1043" />
+    <PLUGIN type="volume" id="1044" enabled="1">
+      <MODIFIERASSIGNMENTS />
+      <MACROPARAMETERS id="1045" />
+    </PLUGIN>
+    <PLUGIN type="level" id="1046" enabled="1">
+      <MACROPARAMETERS id="1047" />
+    </PLUGIN>
+    <OUTPUTDEVICES>
+      <DEVICE name="(default audio output)" />
+    </OUTPUTDEVICES>
+  </TRACK>
+  <TRACK id="1048" midiVProp="0.28125" midiVOffset="0.359375" colour="FFAA00FF" height="59.4378">
+    <MODIFIERS />
+    <MACROPARAMETERS id="1049" />
+    <PLUGIN type="volume" id="1050" enabled="1">
+      <MODIFIERASSIGNMENTS />
+      <MACROPARAMETERS id="1051" />
+    </PLUGIN>
+    <PLUGIN type="level" id="1052" enabled="1">
+      <MACROPARAMETERS id="1053" />
+    </PLUGIN>
+    <OUTPUTDEVICES>
+      <DEVICE name="(default audio output)" />
+    </OUTPUTDEVICES>
+  </TRACK>
+</EDIT>

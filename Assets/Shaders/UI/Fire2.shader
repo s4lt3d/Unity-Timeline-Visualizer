@@ -1,8 +1,8 @@
-// Upgrade NOTE: upgraded instancing buffer 'Fire2' to new syntax.
+// Upgrade NOTE: upgraded instancing buffer 'Waveform' to new syntax.
 
 // Made with Amplify Shader Editor v1.9.3.2
 // Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "Fire2"
+Shader "Waveform"
 {
     Properties
     {
@@ -22,6 +22,7 @@ Shader "Fire2"
         _Texture0("Texture 0", 2D) = "white" {}
         _TextureSample1("Texture Sample 1", 2D) = "white" {}
         _FireLerp("FireLerp", Float) = 0
+        _FireAlpha("FireAlpha", Float) = 0.2
 
     }
 
@@ -98,10 +99,12 @@ Shader "Fire2"
 
             uniform sampler2D _Texture0;
             uniform sampler2D _TextureSample1;
-            UNITY_INSTANCING_BUFFER_START(Fire2)
+            UNITY_INSTANCING_BUFFER_START(Waveform)
+            	UNITY_DEFINE_INSTANCED_PROP(float, _FireAlpha)
+#define _FireAlpha_arr Waveform
             	UNITY_DEFINE_INSTANCED_PROP(float, _FireLerp)
-#define _FireLerp_arr Fire2
-            UNITY_INSTANCING_BUFFER_END(Fire2)
+#define _FireLerp_arr Waveform
+            UNITY_INSTANCING_BUFFER_END(Waveform)
             float3 mod2D289( float3 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
             float2 mod2D289( float2 x ) { return x - floor( x * ( 1.0 / 289.0 ) ) * 289.0; }
             float3 permute( float3 x ) { return mod2D289( ( ( x * 34.0 ) + 1.0 ) * x ); }
@@ -222,9 +225,10 @@ Shader "Fire2"
                 float2 id40 = 0;
                 float2 uv40 = 0;
                 float voroi40 = voronoi40( coords40, time40, id40, uv40, 0, voronoiSmoothId40 );
-                float4 lerpResult70 = lerp( temp_output_23_0 , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , 3.0);
+                float _FireAlpha_Instance = UNITY_ACCESS_INSTANCED_PROP(_FireAlpha_arr, _FireAlpha);
+                float4 lerpResult70 = lerp( temp_output_23_0 , ( ( ( 0.0 - temp_output_25_0 ) < temp_output_9_0 ? 1.0 : 0.0 ) * ( color55 * ( tex2D( _TextureSample1, lerpResult52 ) * ( simplePerlin2D49 * pow( voroi40 , 0.5 ) ) ) ) ) , _FireAlpha_Instance);
                 float _FireLerp_Instance = UNITY_ACCESS_INSTANCED_PROP(_FireLerp_arr, _FireLerp);
-                float4 lerpResult73 = lerp( temp_output_23_0 , lerpResult70 , _FireLerp_Instance);
+                float4 lerpResult73 = lerp( temp_output_23_0 , lerpResult70 , ( _FireLerp_Instance * 0.15 ));
                 
 
                 half4 color = lerpResult73;
@@ -291,12 +295,13 @@ Node;AmplifyShaderEditor.Compare;64;301.0537,-565.0758;Inherit;True;4;4;0;FLOAT;
 Node;AmplifyShaderEditor.ColorNode;5;313.2513,-237.2346;Float;False;Constant;_Color0;Color 0;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;65;1350.822,222.3978;Inherit;True;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;797.5829,24.60763;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;71;1552.128,-90.40115;Inherit;False;Constant;_Float9;Float 9;2;0;Create;True;0;0;0;False;0;False;3;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;74;1658.355,377.4024;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;71;1309.128,-118.4012;Inherit;False;InstancedProperty;_FireAlpha;FireAlpha;3;0;Create;True;0;0;0;False;0;False;0.2;3;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;70;1827.128,-32.40115;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;74;1773.27,556.6571;Float;False;InstancedProperty;_FireLerp;FireLerp;2;0;Create;True;0;0;0;False;0;False;0;0.15;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleNode;78;1894.037,341.8106;Inherit;False;0.15;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StickyNoteNode;59;-1979.157,550.8216;Inherit;False;3047.511;1186.025;New Note;;1,1,1,1;Basic Fire;0;0
-Node;AmplifyShaderEditor.LerpOp;73;2329.919,345.4937;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;32;2793.008,334.8137;Float;False;True;-1;2;ASEMaterialInspector;0;3;Fire2;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
+Node;AmplifyShaderEditor.LerpOp;73;2217.16,240.7813;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;32;2473.203,232.2353;Float;False;True;-1;2;ASEMaterialInspector;0;3;Waveform;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;34;0;33;0
 WireConnection;34;1;35;0
 WireConnection;46;0;47;0
@@ -344,9 +349,10 @@ WireConnection;23;1;28;0
 WireConnection;70;0;23;0
 WireConnection;70;1;65;0
 WireConnection;70;2;71;0
+WireConnection;78;0;74;0
 WireConnection;73;0;23;0
 WireConnection;73;1;70;0
-WireConnection;73;2;74;0
+WireConnection;73;2;78;0
 WireConnection;32;0;73;0
 ASEEND*/
-//CHKSM=E1083C6C9B478B21A6108A617C7EBC089D23807A
+//CHKSM=06A49051EAB74E95B476AE6BDEFACEB0677D7EF6

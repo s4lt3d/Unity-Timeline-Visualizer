@@ -48,7 +48,7 @@ public class WaveformManager : MonoBehaviour, IService
                 }
             }
 
-            if (clipsForTrack.Count > 0)
+            //if (clipsForTrack.Count > 0)
             {
                 trackManager.AddTrack(clipsForTrack);
             }

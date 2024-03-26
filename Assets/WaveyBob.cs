@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class Bob : MonoBehaviour
+public class WaveyBob : MonoBehaviour
 {
     float amplitude = 0.2f;
     float speed = 2.5f;
     float scale = 0.2f;
-
 
     private void Update()
     {
