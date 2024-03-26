@@ -35,12 +35,23 @@ The aim of this project is to develop a Unity project that can read a provided X
 - Async tasks are used to load data as if it were loaded from a url to demonstrate the use of async methodology in Unity. 
 
 ## Future Considerations
-- The project could be completed to become a basic editor with a bit more work. 
+- The project could be completed to become a basic editor with a bit more work.
+### File Dialogs
+- While working with a single hard coded file name is nice, users would really love to pick how to save and load files.
 ### Audio Manager System
 - A system should be developed for the changing in the UI to be registered with the current state of the waveform data. 
 - Audio playback could easily be integrated as the audio data is currently in memory as an audio clip in order to generate the waveforms. 
 ### Sidebar
-- The sidebar with the Clips, SFX, and Patterns could be expanded to provide a list of clips available as drag and drop, SFX would be plugins or effects which are commonly used, and patterns would be groups of clips and sfx commonly found together for ease of use. 
+- The sidebar with the Clips, SFX, and Patterns could be expanded to provide a list of clips available as drag and drop, SFX would be plugins or effects which are commonly used, and patterns would be groups of clips and sfx commonly found together for ease of use.
+#### Clips
+- Show all working clips available in a given directory or the user has added to the project. Will allow for easy drag and drop of favorite clips.
+- Show BMP of clips and allow user to change tempos to match so drag and drop is very easy
+- Click the Clip button should open a panel which allows the user to really focus on editing a clip or record just a single clip. Similar to farlight. 
+#### SFX 
+- Allow for a selection of effects to be easily applied. Clicking the SFX button should open a new panel which allows the user to connect effects in a visual way. 
+#### Patterns
+- Allow the user to put clips together into patterns. Clicking the Patter button should open a new panel which allows the user the create patterns. This would allow the user to create simple patterns that can be used more than once or looped.
+
 ### Workspace History
 - Expanding on the versioning of the data, a workspace history would work similar to git's version history with branching, authorship, history, and tags. This would allow multiple people to work on a project together and be able to share the results. They would also be able to go back and forth in edits to tune their project. 
 
