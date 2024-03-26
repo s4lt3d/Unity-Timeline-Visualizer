@@ -226,7 +226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000037238002, y: 0}
+  m_AnchoredPosition: {x: -4.099281, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &72800703
@@ -1599,8 +1599,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 693982626}
   m_HandleRect: {fileID: 693982625}
   m_Direction: 2
-  m_Value: -0.00000064527575
-  m_Size: 0.36941534
+  m_Value: -0.14126542
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2732,7 +2732,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1152386886}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.81819934
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4177,8 +4177,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 300259681}
   m_HandleRect: {fileID: 300259680}
   m_Direction: 2
-  m_Value: -0.00000064527575
-  m_Size: 0.36941534
+  m_Value: -0.14126542
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9006,7 +9006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000037238002, y: 189.17552}
+  m_AnchoredPosition: {x: -4.099281, y: 215.89934}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1364178935
@@ -10614,7 +10614,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 574132977}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.81819934
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11132,7 +11132,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1699163657}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 0.81819934
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12333,7 +12333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000037238002, y: 189.17552}
+  m_AnchoredPosition: {x: -4.099281, y: 215.89934}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1913198285
@@ -13719,7 +13719,7 @@ PrefabInstance:
     - target: {fileID: 7199807345156714870, guid: 663049207d24bda4292d76c1f6f12453,
         type: 3}
       propertyPath: m_Name
-      value: TrackManager
+      value: UITrackBuilder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13787,6 +13787,11 @@ PrefabInstance:
     - target: {fileID: 1213558964930368796, guid: 81bfcc10d1dafb847affb4e9a06a3d2a,
         type: 3}
       propertyPath: trackManager
+      value: 
+      objectReference: {fileID: 1390167750}
+    - target: {fileID: 1213558964930368796, guid: 81bfcc10d1dafb847affb4e9a06a3d2a,
+        type: 3}
+      propertyPath: uiTracksBuilder
       value: 
       objectReference: {fileID: 1390167750}
     - target: {fileID: 4197815220408284617, guid: 81bfcc10d1dafb847affb4e9a06a3d2a,

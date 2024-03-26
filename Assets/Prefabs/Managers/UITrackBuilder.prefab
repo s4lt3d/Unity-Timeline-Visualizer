@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2855231219054394217}
   - component: {fileID: 3953419865563218439}
   m_Layer: 0
-  m_Name: TrackManager
+  m_Name: UITrackBuilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

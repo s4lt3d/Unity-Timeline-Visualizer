@@ -15,7 +15,7 @@ public class WaveformManager : MonoBehaviour, IService
     public List<GameObject> audioClipPrefabs;
     
     [SerializeField]
-    TrackManager trackManager;
+    UITracksBuilder uiTracksBuilder;
     
     private CancellationTokenSource cancellationTokenSource;
    
@@ -37,8 +37,8 @@ public class WaveformManager : MonoBehaviour, IService
                 
                 string audioName = clip.Name;
                 
-                string audioFilePath = $"file://D:\\UnityGames\\BeatConnectTechTest\\Assets\\Audio\\{audioName}.wav"; 
-
+                var audioFilePath = GetAudioPath(audioName);
+ 
                 AudioClip audioclipData = await AsyncAudioLoader.LoadAudioClipAsync(audioFilePath, cancellationTokenSource.Token);
                 
                 if (audioClip != null)
@@ -47,11 +47,17 @@ public class WaveformManager : MonoBehaviour, IService
                 }
             }
 
-            trackManager.AddTrack(clipsForTrack);
-            
+            uiTracksBuilder.AddTrack(clipsForTrack);
         }
     }
-    
+
+    private static string GetAudioPath(string audioName)
+    {
+        // For future, use a service to get the audio path for a url or local asset bundle. 
+        string audioFilePath = $"file://{Application.dataPath}/Audio/{audioName}.wav";
+        return audioFilePath;
+    }
+
     void OnDestroy()
     {
         cancellationTokenSource?.Cancel();

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TrackManager : MonoBehaviour
+public class UITracksBuilder : MonoBehaviour
 {
     public GameObject TrackPanel;
     public GameObject TrackPrefab;
