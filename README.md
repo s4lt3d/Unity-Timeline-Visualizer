@@ -1,7 +1,7 @@
 # Unity Timeline Visualizer 
 
 ## Project Brief
-The aim of this project is to develop a Unity project that can read a provided XML file and visualize its contents within a Unity scene. This project focuses on using the `TRACK`, `AUDIOCLIP` elements, along with their position information, to create an interactive visualization. The key is not to perfect the implementation but to lay the groundwork for the core functionality and document potential expansions or refinements.
+The aim of this project is to develop a Unity project that can read a provided XML file and visualize its contents within a Unity scene. This project focuses on using the `TRACK`, `TRANSPORT`, and `AUDIOCLIP` elements, along with their position information, to create an interactive visualization. The key is not to perfect the implementation but to lay the groundwork for the core functionality and document potential expansions or refinements.
 
 ![gifs/preview.gif](gifs/preview.gif)
 
