@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class ServiceLocatorInitializer : MonoBehaviour
+/// <summary>
+/// This object should be used in any scene and should not kept between scenes
+/// </summary>
+public class ServiceInitializer : MonoBehaviour
 {
     private void Awake()
     {
@@ -12,6 +16,8 @@ public class ServiceLocatorInitializer : MonoBehaviour
     private void RegisterServices()
     {
         ServiceLocator.RegisterService<IWaveformSerializer>(new WaveformXMLSerializer());
+        // place any other non-monobehaviour services here in the order they should be initialized
+        
     }
     
     private void InitServices()
@@ -20,5 +26,10 @@ public class ServiceLocatorInitializer : MonoBehaviour
         {
             service?.InitializeService();
         }
+    }
+
+    private void OnDestroy()
+    {
+        // Remove any services that are scene dependant. 
     }
 }
