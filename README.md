@@ -57,4 +57,4 @@ The aim of this project is to develop a Unity project that can read a provided X
 
 ## Discussions
 - **Custom Shader Development:** A basic implementation of a fragment shader was written by hand. However, utilizing a visual shader tool is significantly easier and provides the same benefits and a hand written shader. 
--- The shader graph used was Amiplify Shader Editor which provides the raw shader code if performance tweaking becomes nessecary. 
+- The shader graph used was Amiplify Shader Editor which provides the raw shader code if performance tweaking becomes nessecary. This editors supports all supported platforms and allows the designer to quickly specify all fallbacks if needed. 
