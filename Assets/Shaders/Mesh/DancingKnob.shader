@@ -7,6 +7,8 @@ Shader "DancingKnob"
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		_Color0("Color 0", Color) = (0.1529412,0.2,0.2627451,1)
+		_Speed("Speed", Float) = 2.5
+		_Edges("Edges", Float) = 8
 
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
@@ -319,6 +321,8 @@ Shader "DancingKnob"
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Color0)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -332,9 +336,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -344,7 +351,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -792,7 +799,6 @@ Shader "DancingKnob"
 
 			HLSLPROGRAM
 
-			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
 			#define _NORMAL_DROPOFF_TS 1
@@ -821,6 +827,7 @@ Shader "DancingKnob"
             #endif
 
 			#define ASE_NEEDS_VERT_POSITION
+			#pragma multi_compile_instancing
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -886,6 +893,8 @@ Shader "DancingKnob"
 			#endif
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -902,9 +911,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -914,7 +926,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
 				#else
@@ -1105,7 +1117,6 @@ Shader "DancingKnob"
 
 			HLSLPROGRAM
 
-			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
 			#define _NORMAL_DROPOFF_TS 1
@@ -1132,6 +1143,7 @@ Shader "DancingKnob"
             #endif
 
 			#define ASE_NEEDS_VERT_POSITION
+			#pragma multi_compile_instancing
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -1197,6 +1209,8 @@ Shader "DancingKnob"
 			#endif
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -1210,9 +1224,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -1222,7 +1239,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -1476,6 +1493,8 @@ Shader "DancingKnob"
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Color0)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -1489,9 +1508,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -1501,7 +1523,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -1762,6 +1784,8 @@ Shader "DancingKnob"
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Color0)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -1775,9 +1799,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -1787,7 +1814,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -1942,7 +1969,6 @@ Shader "DancingKnob"
 
 			HLSLPROGRAM
 
-			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
 			#define _NORMAL_DROPOFF_TS 1
@@ -1971,6 +1997,7 @@ Shader "DancingKnob"
             #endif
 
 			#define ASE_NEEDS_VERT_POSITION
+			#pragma multi_compile_instancing
 
 
 			#if defined(ASE_EARLY_Z_DEPTH_OPTIMIZE) && (SHADER_TARGET >= 45)
@@ -2039,6 +2066,8 @@ Shader "DancingKnob"
 			#endif
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -2052,9 +2081,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -2063,7 +2095,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -2413,6 +2445,8 @@ Shader "DancingKnob"
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Color0)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -2428,9 +2462,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -2439,7 +2476,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -2775,6 +2812,7 @@ Shader "DancingKnob"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
 			#define ASE_NEEDS_VERT_POSITION
+			#pragma multi_compile_instancing
 
 
 			struct VertexInput
@@ -2825,6 +2863,8 @@ Shader "DancingKnob"
 			#endif
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -2846,9 +2886,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -2858,7 +2901,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -3021,6 +3064,7 @@ Shader "DancingKnob"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
 			#define ASE_NEEDS_VERT_POSITION
+			#pragma multi_compile_instancing
 
 
 			struct VertexInput
@@ -3071,6 +3115,8 @@ Shader "DancingKnob"
 			#endif
 
 			UNITY_INSTANCING_BUFFER_START(DancingKnob)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Edges)
+				UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
 			UNITY_INSTANCING_BUFFER_END(DancingKnob)
 
 
@@ -3092,9 +3138,12 @@ Shader "DancingKnob"
 
 				float3 break43 = v.positionOS.xyz;
 				float temp_output_39_0 = atan2( break43.x , break43.z );
-				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * 8.0 );
-				float mulTime17 = _TimeParameters.x * 2.5;
-				float clampResult67 = clamp( ( sin( mulTime17 ) * 20.0 ) , -18.0 , 18.0 );
+				float _Edges_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Edges);
+				float temp_output_53_0 = ( (( temp_output_39_0 >= -7.0 && temp_output_39_0 <= 7.0 ) ? temp_output_39_0 :  0.0 ) * _Edges_Instance );
+				float3 objToWorld86 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
+				float _Speed_Instance = UNITY_ACCESS_INSTANCED_PROP(DancingKnob,_Speed);
+				float mulTime17 = _TimeParameters.x * _Speed_Instance;
+				float clampResult67 = clamp( ( sin( ( objToWorld86.x + objToWorld86.z + mulTime17 ) ) * 20.0 ) , -18.0 , 18.0 );
 				float4 appendResult34 = (float4(sin( ( temp_output_53_0 + clampResult67 ) ) , 0.0 , cos( ( temp_output_53_0 + clampResult67 ) ) , 0.0));
 				
 
@@ -3104,7 +3153,7 @@ Shader "DancingKnob"
 					float3 defaultVertexValue = float3(0, 0, 0);
 				#endif
 
-				float3 vertexValue = ( appendResult34 * 0.01 ).xyz;
+				float3 vertexValue = ( appendResult34 * 0.02 ).xyz;
 
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					v.positionOS.xyz = vertexValue;
@@ -3239,20 +3288,22 @@ Shader "DancingKnob"
 }
 /*ASEBEGIN
 Version=19302
-Node;AmplifyShaderEditor.RangedFloatNode;19;-1643.249,-308.1217;Inherit;False;Constant;_Float1;Float 1;0;0;Create;True;0;0;0;False;0;False;2.5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;19;-1890.749,-346.8216;Inherit;False;InstancedProperty;_Speed;Speed;1;0;Create;True;0;0;0;False;0;False;2.5;2.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.PosVertexDataNode;63;-2383.021,-864.0121;Inherit;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SimpleTimeNode;17;-1460.748,-316.0217;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleTimeNode;17;-1691.451,-344.2076;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TransformPositionNode;86;-1951.262,-572.206;Inherit;False;Object;World;False;Fast;True;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.BreakToComponentsNode;43;-2074.309,-885.6464;Inherit;True;FLOAT3;1;0;FLOAT3;0,0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
+Node;AmplifyShaderEditor.SimpleAddOpNode;84;-1403.064,-457.0015;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ATan2OpNode;39;-1701.46,-807.9586;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;61;-1566.502,-907.6271;Inherit;False;Constant;_Float3;Float 3;0;0;Create;True;0;0;0;False;0;False;7;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;62;-1571.705,-993.626;Inherit;False;Constant;_Float4;Float 4;0;0;Create;True;0;0;0;False;0;False;-7;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SinOpNode;64;-1237.522,-338.9103;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;66;-1240.522,-168.9103;Inherit;False;Constant;_Float5;Float 5;0;0;Create;True;0;0;0;False;0;False;20;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;54;-1247.56,-553.4161;Inherit;False;Constant;_Float0;Float 0;0;0;Create;True;0;0;0;False;0;False;8;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TFHCCompareWithRange;60;-1321.003,-786.0273;Inherit;False;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;65;-1025.522,-299.9103;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;68;-963.0804,-98.95801;Inherit;False;Constant;_Float6;Float 6;0;0;Create;True;0;0;0;False;0;False;18;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;69;-955.0804,-181.958;Inherit;False;Constant;_Float7;Float 7;0;0;Create;True;0;0;0;False;0;False;-18;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;54;-1247.56,-553.4161;Inherit;False;InstancedProperty;_Edges;Edges;2;0;Create;True;0;0;0;False;0;False;8;8;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;53;-979.3419,-756.6902;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ClampOpNode;67;-694.5613,-336.2386;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;57;-655.1292,-652.272;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -3260,7 +3311,7 @@ Node;AmplifyShaderEditor.SimpleAddOpNode;58;-669.1292,-838.272;Inherit;False;2;2
 Node;AmplifyShaderEditor.SinOpNode;38;-491.2527,-927.5552;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.CosOpNode;37;-490.4895,-699.0473;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;34;-137.9393,-767.0556;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.RangedFloatNode;56;-90.73515,-525.1797;Inherit;False;Constant;_Float2;Float 0;0;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;56;-90.73515,-525.1797;Inherit;False;Constant;_Float2;Float 0;0;0;Create;True;0;0;0;False;0;False;0.02;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;35;164.0229,-735.2841;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.ColorNode;83;96.8031,-1418.094;Inherit;False;InstancedProperty;_Color0;Color 0;0;0;Create;True;0;0;0;False;0;False;0.1529412,0.2,0.2627451,1;0.1529412,0.2,0.2627451,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
@@ -3275,9 +3326,12 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;608.2788,-1295.262;Float;False;True;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;DancingKnob;94348b07e5e8bab40bd6c8a1e3df54cd;True;Forward;0;1;Forward;21;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;39;Workflow;1;0;Surface;0;0;  Refraction Model;0;0;  Blend;0;0;Two Sided;1;638469870804586135;Fragment Normal Space,InvertActionOnDeselection;0;638469866085260925;Forward Only;0;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;_FinalColorxAlpha;0;0;Meta Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;0;Debug Display;0;0;Clear Coat;0;0;0;10;False;True;True;True;True;True;True;True;True;True;False;;False;0
 WireConnection;17;0;19;0
 WireConnection;43;0;63;0
+WireConnection;84;0;86;1
+WireConnection;84;1;86;3
+WireConnection;84;2;17;0
 WireConnection;39;0;43;0
 WireConnection;39;1;43;2
-WireConnection;64;0;17;0
+WireConnection;64;0;84;0
 WireConnection;60;0;39;0
 WireConnection;60;1;62;0
 WireConnection;60;2;61;0
@@ -3302,4 +3356,4 @@ WireConnection;35;1;56;0
 WireConnection;1;0;83;0
 WireConnection;1;8;35;0
 ASEEND*/
-//CHKSM=CBF083B38B7A357404D8D2A776C7FA5BBA919280
+//CHKSM=9D1FE92C668C669C5A1A9D37305A30DCCCE87060

@@ -7,6 +7,7 @@ Shader "Sliders"
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		_Color0("Color 0", Color) = (0.4235294,0.3921569,0.3254902,1)
+		_Speed("Speed", Float) = 2.5
 
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
@@ -286,7 +287,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -330,8 +332,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -851,7 +853,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -897,8 +900,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -1159,7 +1162,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -1202,8 +1206,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -1434,7 +1438,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -1478,8 +1483,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -1717,7 +1722,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -1761,8 +1767,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO( o );
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -1992,7 +1998,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -2035,8 +2042,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -2362,7 +2369,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -2408,8 +2416,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
@@ -2772,7 +2780,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -2823,8 +2832,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -3015,7 +3024,8 @@ Shader "Sliders"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TRANSMISSION
+			float _Speed;
+			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
 			#ifdef ASE_TRANSLUCENCY
@@ -3066,8 +3076,8 @@ Shader "Sliders"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
 				float3 objToWorld24 = mul( GetObjectToWorldMatrix(), float4( float3( 0,0,0 ), 1 ) ).xyz;
-				float mulTime10 = _TimeParameters.x * 2.5;
-				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * objToWorld24.x ) + mulTime10 ) ) * 0.5 ) , 0.0));
+				float mulTime10 = _TimeParameters.x * _Speed;
+				float4 appendResult13 = (float4(0.0 , 0.0 , ( sin( ( ( 2.0 * ( objToWorld24.x + objToWorld24.z ) ) + mulTime10 ) ) * 0.5 ) , 0.0));
 				float4 clampResult25 = clamp( appendResult13 , float4(-0.3,0,-0.3,0) , float4(0.3,0,0.3,0) );
 				
 
@@ -3212,9 +3222,10 @@ Shader "Sliders"
 }
 /*ASEBEGIN
 Version=19302
-Node;AmplifyShaderEditor.TransformPositionNode;24;-1475.616,-148.7267;Inherit;False;Object;World;False;Fast;True;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.TransformPositionNode;24;-1673.616,-187.7267;Inherit;False;Object;World;False;Fast;True;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.RangedFloatNode;21;-1417.926,-260.1485;Inherit;False;Constant;_Float2;Float 1;0;0;Create;True;0;0;0;False;0;False;2;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;12;-1446.707,36.37273;Inherit;False;Constant;_Float0;Float 0;0;0;Create;True;0;0;0;False;0;False;2.5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;30;-1377.6,-165.5396;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;12;-1495.707,40.37273;Inherit;False;Property;_Speed;Speed;1;0;Create;True;0;0;0;False;0;False;2.5;2.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;10;-1105.707,9.372723;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;22;-1120.274,-122.1652;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;17;-885.7068,-57.62724;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -3236,9 +3247,11 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;7;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;8;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;SceneSelectionPass;0;8;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ScenePickingPass;0;9;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;185,-263;Float;False;True;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;Sliders;94348b07e5e8bab40bd6c8a1e3df54cd;True;Forward;0;1;Forward;21;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Lit;True;5;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;39;Workflow;1;0;Surface;0;0;  Refraction Model;0;0;  Blend;0;0;Two Sided;1;0;Fragment Normal Space,InvertActionOnDeselection;0;0;Forward Only;0;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;_FinalColorxAlpha;0;0;Meta Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;638469836233323888;Debug Display;0;0;Clear Coat;0;0;0;10;False;True;True;True;True;True;True;True;True;True;False;;False;0
+WireConnection;30;0;24;1
+WireConnection;30;1;24;3
 WireConnection;10;0;12;0
 WireConnection;22;0;21;0
-WireConnection;22;1;24;1
+WireConnection;22;1;30;0
 WireConnection;17;0;22;0
 WireConnection;17;1;10;0
 WireConnection;11;0;17;0
@@ -3251,4 +3264,4 @@ WireConnection;25;2;27;0
 WireConnection;1;0;29;0
 WireConnection;1;8;25;0
 ASEEND*/
-//CHKSM=58ADEE6F4D6D4FEDC64302278CCB51BA57245579
+//CHKSM=E8E0DCC3D5A6950B2D6D39AB50DEA58BEF7AC685

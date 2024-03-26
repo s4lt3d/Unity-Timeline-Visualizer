@@ -2848,6 +2848,7 @@ GameObject:
   - component: {fileID: 3138773204319203647}
   - component: {fileID: 4646379529498267272}
   - component: {fileID: 5869664332473123716}
+  - component: {fileID: 2185522029336194536}
   m_Layer: 0
   m_Name: BigKnob
   m_TagString: Untagged
@@ -3190,3 +3191,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &2185522029336194536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358498850025667595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ad7d3d704d0f84ebf02dc1a82e740a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
